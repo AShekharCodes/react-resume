@@ -19,9 +19,6 @@ import { grey } from "@mui/material/colors";
 import logo from "../../images/almabetter_logo.png";
 import "../../styling/Navbar.css";
 
-const drawerWidth = "200px";
-const navItems = ["Resume Templates", "My Resumes", "About Us"];
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -42,13 +39,21 @@ function Navbar() {
       <img src={logo} className="drawerlogo" alt="AlmaBetter-logo" />
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key={"Resume Templates"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"Resume Templates"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={"My Resumes"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"My Resumes"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={"About Us"} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"About Us"} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -121,13 +126,13 @@ function Navbar() {
             open={mobileOpen}
             onClose={handleDrawerToggle}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
             sx={{
               display: { xs: "block", sm: "none" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
-                width: drawerWidth,
+                width: "200px",
               },
             }}
           >
