@@ -10,14 +10,8 @@ const Homepage = () => {
     <>
       <Navbar />
       <Box sx={{ margin: "0px 40px" }}>
-        <Typography variant="h4" align="center">
-          Templates
-        </Typography>
-        <Typography
-          variant="h6"
-          align="center"
-          sx={{ fontSize: "15px", marginTop: "7px" }}
-        >
+        <Typography variant="h4">Templates</Typography>
+        <Typography variant="h6" sx={{ fontSize: "15px", marginTop: "7px" }}>
           Select a Template to get Started
         </Typography>
         <Box
