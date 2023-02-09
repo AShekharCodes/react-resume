@@ -25,16 +25,18 @@
   -ms-transform: translate(-50%, -50%);
   background-color: rgb(7, 117, 219);
   color: white;
-  font-size: 12px;
+  font-size: 14px;
+  padding: 6px 12px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   text-align: center;
   display: none;
+  text-decoration: none;
 }
 
 .container .btn:hover {
-  background-color: rgb(4, 100, 209);
+  background-color: rgb(4, 100, 220);
 }
 
 .container:hover .btn {

@@ -1,8 +1,9 @@
 .drawerlogo {
   width: 120px;
   height: 30px;
-  margin: 14px 0px 6px -1px;
+  margin: 14px 0px 5px -1px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .mainlogo {
@@ -11,6 +12,7 @@
   margin-top: 6px;
   margin-left: 4px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .toolbar-box {
@@ -33,7 +35,7 @@
 
 .btn {
   color: black;
-  font-size: 17px;
+  font-size: 15.9px;
   text-transform: capitalize;
   padding: 4px 8px;
   font-family: "Poppins", sans-serif;

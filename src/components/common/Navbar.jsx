@@ -32,16 +32,18 @@ function Navbar() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <img src={logo} className="drawerlogo" alt="AlmaBetter-logo" />
+      <NavLink to="/">
+        <img src={logo} className="drawerlogo" alt="AlmaBetter-logo" />
+      </NavLink>
       <Divider />
       <div className="list-container">
         <NavLink to="/" className="list-btn">
           Resume Templates
         </NavLink>
-        <NavLink to="my_resumes" className="list-btn">
+        <NavLink to="/my_resumes" className="list-btn">
           My Resumes
         </NavLink>
-        <NavLink to="about_us" className="list-btn">
+        <NavLink to="/about_us" className="list-btn">
           About Us
         </NavLink>
       </div>
@@ -68,7 +70,9 @@ function Navbar() {
                 component="div"
                 sx={{ flexGrow: 1, display: { sm: "block" } }}
               >
-                <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
+                <NavLink to="/">
+                  <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
+                </NavLink>
               </Typography>
             </Toolbar>
             <Box
@@ -81,10 +85,10 @@ function Navbar() {
                 <NavLink to="/" className="btn">
                   Resume Templates
                 </NavLink>
-                <NavLink to="my_resumes" className="btn">
+                <NavLink to="/my_resumes" className="btn">
                   My Resumes
                 </NavLink>
-                <NavLink to="about_us" className="btn">
+                <NavLink to="/about_us" className="btn">
                   About Us
                 </NavLink>
               </div>

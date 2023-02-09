@@ -1,6 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
-import { Typography, Box, Paper, Button } from "@mui/material";
+import { Typography, Box, Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import template from "../images/resume_template.png";
 import "../styling/Homepage.css";
@@ -10,8 +11,14 @@ const Homepage = () => {
     <>
       <Navbar />
       <Box sx={{ margin: "0px 40px" }}>
-        <Typography variant="h4">Templates</Typography>
-        <Typography variant="h6" sx={{ fontSize: "15px", marginTop: "7px" }}>
+        <Typography variant="h4" align="center">
+          Templates
+        </Typography>
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ fontSize: "15px", marginTop: "7px" }}
+        >
           Select a Template to get Started
         </Typography>
         <Box
@@ -34,7 +41,9 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <Button className="btn">Use Template</Button>
+                  <NavLink to="/details" className="btn">
+                    Use Template
+                  </NavLink>
                 </div>
               </Paper>
             </Grid>
@@ -51,7 +60,9 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <Button className="btn">Use Template</Button>
+                  <NavLink to="/details" className="btn">
+                    Use Template
+                  </NavLink>
                 </div>
               </Paper>
             </Grid>
@@ -68,7 +79,9 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <Button className="btn">Use Template</Button>
+                  <NavLink to="/details" className="btn">
+                    Use Template
+                  </NavLink>
                 </div>
               </Paper>
             </Grid>
@@ -85,7 +98,9 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <Button className="btn">Use Template</Button>
+                  <NavLink to="/details" className="btn">
+                    Use Template
+                  </NavLink>
                 </div>
               </Paper>
             </Grid>
