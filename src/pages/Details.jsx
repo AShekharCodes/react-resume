@@ -13,21 +13,14 @@ const Details = () => {
         spacing={0}
         sx={{ padding: "10px 20px" }}
       >
-        <Grid
-          item
-          className="tabs"
-          xs={12}
-          sm={4}
-          md={4}
-          lg={3}
-          sx={{ border: "1px solid black", margin: "0" }}
-        >
-          Tabs here
+        <Grid item className="tabs-grid" xs={12} sm={4} md={4} lg={4}>
+          <div className="tabs">Tabs here</div>
         </Grid>
-        <Grid item className="paper" xs={12} sm={8} md={8} lg={9}>
-          <Paper elevation={1} sx={{ textAlign: "center", margin: "0" }}>
-            Paper Here
-          </Paper>
+
+        <Grid item className="paper-grid" xs={12} sm={8} md={8} lg={8}>
+          <div className="paper">
+            <Paper elevation={1}>Paper Here</Paper>
+          </div>
         </Grid>
       </Grid>
     </>
