@@ -1,0 +1,23 @@
+.list {
+  padding-top: 0;
+  padding-bottom: 0;
+  box-shadow: 0.5px 3px 5px rgb(230, 229, 229);
+}
+
+.list-item {
+  border: 0.5px solid rgb(230, 229, 229);
+  border-radius: 4px;
+  padding: 4px 0px;
+}
+
+.list-button {
+  border-left: 3px solid rgb(44, 109, 230);
+}
+
+.list-text {
+  padding-left: 20px;
+}
+
+.list-text:hover {
+  color: rgb(44, 109, 230);
+}
