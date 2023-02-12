@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styling/Navigationtabs.css";
 
 const Navigationtabs = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(1);
 
   const handleClick = (id) => {
     setSelectedButton(id);
