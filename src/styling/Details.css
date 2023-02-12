@@ -2,6 +2,10 @@
   display: grid;
 }
 
+.tabs-grid {
+  text-align: center;
+}
+
 .component-grid {
   text-align: center;
 }
@@ -31,8 +35,7 @@
 
 @media only screen and (max-width: 800px) {
   .component {
-    padding: 0px;
-    margin-right: 0px;
+    padding: 0;
   }
   .tabs {
     margin-left: 0px;
@@ -44,8 +47,5 @@
     margin-left: auto;
     margin-right: auto;
     min-width: 200px;
-  }
-  .component {
-    margin-right: 10px;
   }
 }
