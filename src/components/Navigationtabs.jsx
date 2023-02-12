@@ -1,32 +1,81 @@
-import React from "react";
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import React, { useState } from "react";
 import "../styling/Navigationtabs.css";
 
 const Navigationtabs = () => {
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleClick = (id) => {
+    setSelectedButton(id);
+  };
+
   return (
     <>
-      <List className="list" dense>
-        <ListItem className="list-item">
-          <ListItemButton className="list-button">
-            <ListItemText className="list-text" primary="Personal Info" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem className="list-item">
-          <ListItemButton className="list-button">
-            <ListItemText className="list-text" primary="Work Experience" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem className="list-item">
-          <ListItemButton className="list-button">
-            <ListItemText className="list-text" primary="Education" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem className="list-item">
-          <ListItemButton className="list-button">
-            <ListItemText className="list-text" primary="Key Skills" />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      <div className="list">
+        <div className="list-item">
+          <button
+            className="list-button"
+            onClick={() => handleClick(1)}
+            style={
+              selectedButton === 1
+                ? {
+                    borderLeft: "3px solid rgb(44, 109, 230)",
+                    color: "rgb(44, 109, 230)",
+                  }
+                : {}
+            }
+          >
+            Personal Info
+          </button>
+        </div>
+        <div className="list-item">
+          <button
+            className="list-button"
+            onClick={() => handleClick(2)}
+            style={
+              selectedButton === 2
+                ? {
+                    borderLeft: "3px solid rgb(44, 109, 230)",
+                    color: "rgb(44, 109, 230)",
+                  }
+                : {}
+            }
+          >
+            Work Experience
+          </button>
+        </div>
+        <div className="list-item">
+          <button
+            className="list-button"
+            onClick={() => handleClick(3)}
+            style={
+              selectedButton === 3
+                ? {
+                    borderLeft: "3px solid rgb(44, 109, 230)",
+                    color: "rgb(44, 109, 230)",
+                  }
+                : {}
+            }
+          >
+            Education
+          </button>
+        </div>
+        <div className="list-item">
+          <button
+            className="list-button"
+            onClick={() => handleClick(4)}
+            style={
+              selectedButton === 4
+                ? {
+                    borderLeft: "3px solid rgb(44, 109, 230)",
+                    color: "rgb(44, 109, 230)",
+                  }
+                : {}
+            }
+          >
+            Key Skills
+          </button>
+        </div>
+      </div>
     </>
   );
 };
