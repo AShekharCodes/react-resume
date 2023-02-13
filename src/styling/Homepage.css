@@ -10,7 +10,7 @@
 .template {
   width: 300px;
   height: 430px;
-  box-shadow: 4px 4px 15px;
+  box-shadow: 3px 3px 10px;
 }
 
 .template:hover {
@@ -35,7 +35,7 @@
   text-decoration: none;
 }
 
-.container .btn:hover {
+.btn:hover {
   background-color: rgb(4, 100, 220);
 }
 

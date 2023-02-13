@@ -9,12 +9,7 @@ const Details = () => {
   return (
     <>
       <Navbar />
-      <Grid
-        className="details-grid"
-        container
-        spacing={0}
-        sx={{ padding: "10px 20px" }}
-      >
+      <Grid className="details-grid" container spacing={0}>
         <Grid item className="tabs-grid" xs={12} sm={4} md={4} lg={4}>
           <div className="tabs">
             <Navigationtabs />
