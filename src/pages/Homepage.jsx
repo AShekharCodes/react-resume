@@ -4,7 +4,7 @@ import Navbar from "../components/common/Navbar";
 import { Typography, Box, Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import template from "../images/resume_template.png";
-import "../styling/Homepage.css";
+import "../styles/Homepage.css";
 
 const Homepage = () => {
   return (

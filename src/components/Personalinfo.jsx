@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper, Grid, Button } from "@mui/material";
 import Inputcomponent from "./Inputcomponent";
 import Imageupload from "./Imageupload";
-import "../styling/Personalinfo.css";
+import "../styles/Personalinfo.css";
 
 const Personalinfo = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Personalinfo = () => {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Personal Details</div>
           </Grid>
-          <hr className="hr1" />
+          <hr />
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="image-component">
               <Imageupload />
@@ -70,7 +70,7 @@ const Personalinfo = () => {
               placeholder="Max 400 characters"
             />
           </Grid>
-          <hr className="hr2" />
+          <hr />
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="back-next-btn">
               <Button
@@ -96,7 +96,7 @@ const Personalinfo = () => {
                   color: "red",
                   textTransform: "capitalize",
                   fontSize: "12px",
-                  padding: "7px 35px",
+                  padding: "7px 33px",
                   fontWeight: "bold",
                   border: " 2px solid red",
                   ":hover": { border: "2px solid red", boxShadow: "none" },
@@ -112,7 +112,7 @@ const Personalinfo = () => {
                   fontFamily: "Poppins, sans-serif",
                   textTransform: "capitalize",
                   fontSize: "12px",
-                  padding: "7px 35px",
+                  padding: "7px 36px",
                   fontWeight: "bold",
                   border: " 2px solid #1976D2",
                   ":hover": { border: "2px solid #1976D2", boxShadow: "none" },

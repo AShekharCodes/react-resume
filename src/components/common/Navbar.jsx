@@ -11,7 +11,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import logo from "../../images/almabetter_logo.png";
-import "../../styling/Navbar.css";
+import "../../styles/Navbar.css";
 
 const theme = createTheme({
   palette: {

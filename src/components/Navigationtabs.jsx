@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import "../styling/Navigationtabs.css";
+import React, { useState, useEffect } from "react";
+import "../styles/Navigationtabs.css";
 
-const Navigationtabs = () => {
-  const [selectedButton, setSelectedButton] = useState(1);
+const Navigationtabs = ({ onTabSelect }) => {
+  const [currentTab, setCurrentTab] = useState(
+    Number(localStorage.getItem("selectedTab")) || 1
+  );
 
-  const handleClick = (id) => {
-    setSelectedButton(id);
+  useEffect(() => {
+    localStorage.setItem("selectedTab", currentTab);
+  }, [currentTab]);
+
+  const setTab = (tab) => {
+    setCurrentTab(tab);
+    onTabSelect(tab);
+  };
+
+  const style = {
+    borderLeft: "3px solid rgb(44, 109, 230)",
+    color: "rgb(44, 109, 230)",
   };
 
   return (
@@ -14,15 +26,8 @@ const Navigationtabs = () => {
         <div className="list-item">
           <button
             className="list-button"
-            onClick={() => handleClick(1)}
-            style={
-              selectedButton === 1
-                ? {
-                    borderLeft: "3px solid rgb(44, 109, 230)",
-                    color: "rgb(44, 109, 230)",
-                  }
-                : {}
-            }
+            onClick={() => setTab(1)}
+            style={currentTab === 1 ? style : null}
           >
             Personal Info
           </button>
@@ -30,15 +35,8 @@ const Navigationtabs = () => {
         <div className="list-item">
           <button
             className="list-button"
-            onClick={() => handleClick(2)}
-            style={
-              selectedButton === 2
-                ? {
-                    borderLeft: "3px solid rgb(44, 109, 230)",
-                    color: "rgb(44, 109, 230)",
-                  }
-                : {}
-            }
+            onClick={() => setTab(2)}
+            style={currentTab === 2 ? style : null}
           >
             Work Experience
           </button>
@@ -46,15 +44,8 @@ const Navigationtabs = () => {
         <div className="list-item">
           <button
             className="list-button"
-            onClick={() => handleClick(3)}
-            style={
-              selectedButton === 3
-                ? {
-                    borderLeft: "3px solid rgb(44, 109, 230)",
-                    color: "rgb(44, 109, 230)",
-                  }
-                : {}
-            }
+            onClick={() => setTab(3)}
+            style={currentTab === 3 ? style : null}
           >
             Education
           </button>
@@ -62,15 +53,8 @@ const Navigationtabs = () => {
         <div className="list-item">
           <button
             className="list-button"
-            onClick={() => handleClick(4)}
-            style={
-              selectedButton === 4
-                ? {
-                    borderLeft: "3px solid rgb(44, 109, 230)",
-                    color: "rgb(44, 109, 230)",
-                  }
-                : {}
-            }
+            onClick={() => setTab(4)}
+            style={currentTab === 4 ? style : null}
           >
             Key Skills
           </button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
-import "../styling/Inputcomponent.css";
+import "../styles/Inputcomponent.css";
 
 const Inputcomponent = (props) => {
   //to adjust input field height according to screen width

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button, Avatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import "../styling/Imageupload.css";
+import "../styles/Imageupload.css";
 
 const Imageupload = () => {
   const [image, setImage] = useState(null);
@@ -33,11 +33,13 @@ const Imageupload = () => {
         <div className="avatar-cross">
           <Avatar
             src={image}
+            onClick={uploadImage}
             sx={{
               width: "125px",
               height: "125px",
               margin: "5px 0px 5px 10px",
               border: "0.5px solid rgb(92, 92, 92)",
+              cursor: "pointer",
             }}
           />
           {image ? (

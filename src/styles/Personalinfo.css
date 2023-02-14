@@ -2,14 +2,9 @@
   padding: 30px;
 }
 
-.hr1 {
+hr {
   width: 100%;
   margin: 0px 15px;
-}
-
-.hr2 {
-  width: 100%;
-  margin: 100px 15px 0px 15px;
 }
 
 .header {
