@@ -1,10 +1,17 @@
 import React from "react";
-import { Paper, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Paper, Grid, Button } from "@mui/material";
 import Inputcomponent from "./Inputcomponent";
-// import Imageupload from "./Imageupload";
+import Imageupload from "./Imageupload";
 import "../styling/Personalinfo.css";
 
 const Personalinfo = () => {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Paper elevation={3}>
@@ -13,11 +20,11 @@ const Personalinfo = () => {
             <div className="header">Personal Details</div>
           </Grid>
           <hr className="hr1" />
-          {/* <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="image-component">
               <Imageupload />
             </div>
-          </Grid> */}
+          </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent type="text" label="First name" id="first-name" />
           </Grid>
@@ -64,6 +71,58 @@ const Personalinfo = () => {
             />
           </Grid>
           <hr className="hr2" />
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <div className="back-next-btn">
+              <Button
+                variant="outlined"
+                onClick={goBack}
+                sx={{
+                  fontFamily: "Poppins, sans-serif",
+                  textTransform: "capitalize",
+                  fontSize: "12px",
+                  padding: "7px 35px",
+                  fontWeight: "bold",
+                  border: " 2px solid #1976D2",
+                  ":hover": { border: "2px solid #1976D2", boxShadow: "none" },
+                  boxShadow: "none",
+                }}
+              >
+                Back
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  fontFamily: "Poppins, sans-serif",
+                  color: "red",
+                  textTransform: "capitalize",
+                  fontSize: "12px",
+                  padding: "7px 35px",
+                  fontWeight: "bold",
+                  border: " 2px solid red",
+                  ":hover": { border: "2px solid red", boxShadow: "none" },
+                  boxShadow: "none",
+                }}
+              >
+                Reset
+              </Button>
+
+              <Button
+                variant="contained"
+                sx={{
+                  fontFamily: "Poppins, sans-serif",
+                  textTransform: "capitalize",
+                  fontSize: "12px",
+                  padding: "7px 35px",
+                  fontWeight: "bold",
+                  border: " 2px solid #1976D2",
+                  ":hover": { border: "2px solid #1976D2", boxShadow: "none" },
+                  boxShadow: "none",
+                }}
+              >
+                Next
+              </Button>
+            </div>
+          </Grid>
         </Grid>
       </Paper>
     </>
