@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, Grid } from "@mui/material";
 import Inputcomponent from "./Inputcomponent";
+// import Imageupload from "./Imageupload";
 import "../styling/Personalinfo.css";
 
 const Personalinfo = () => {
@@ -12,6 +13,11 @@ const Personalinfo = () => {
             <div className="header">Personal Details</div>
           </Grid>
           <hr className="hr1" />
+          {/* <Grid item xs={12} sm={12} md={12} lg={12}>
+            <div className="image-component">
+              <Imageupload />
+            </div>
+          </Grid> */}
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent type="text" label="First name" id="first-name" />
           </Grid>

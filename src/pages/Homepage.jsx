@@ -41,7 +41,7 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <NavLink to="/details" className="btn">
+                  <NavLink to="/details" className="template-btn">
                     Use Template
                   </NavLink>
                 </div>
@@ -60,7 +60,7 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <NavLink to="/details" className="btn">
+                  <NavLink to="/details" className="template-btn">
                     Use Template
                   </NavLink>
                 </div>
@@ -79,7 +79,7 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <NavLink to="/details" className="btn">
+                  <NavLink to="/details" className="template-btn">
                     Use Template
                   </NavLink>
                 </div>
@@ -98,7 +98,7 @@ const Homepage = () => {
               >
                 <div className="container">
                   <img src={template} className="template" alt="Template" />
-                  <NavLink to="/details" className="btn">
+                  <NavLink to="/details" className="template-btn">
                     Use Template
                   </NavLink>
                 </div>

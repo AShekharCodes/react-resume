@@ -42,7 +42,8 @@
   text-decoration: none;
 }
 
-.btn:hover {
+.btn:hover,
+.list-btn:hover {
   color: rgb(44, 109, 230);
 }
 
@@ -54,14 +55,10 @@
 }
 
 .list-btn {
-  font-size: 17px;
+  font-size: 16px;
   color: black;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
-}
-
-.list-btn:hover {
-  color: rgb(44, 109, 230);
 }
 
 .active {

@@ -3,13 +3,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import logo from "../../images/almabetter_logo.png";
@@ -53,7 +51,6 @@ function Navbar() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
-        <CssBaseline />
         <AppBar component="nav">
           <div className="toolbar-box">
             <Toolbar className="toolbar">
@@ -66,14 +63,10 @@ function Navbar() {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography
-                component="div"
-                sx={{ flexGrow: 1, display: { sm: "block" } }}
-              >
-                <NavLink to="/">
-                  <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
-                </NavLink>
-              </Typography>
+
+              <NavLink to="/">
+                <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
+              </NavLink>
             </Toolbar>
             <Box
               className="box"

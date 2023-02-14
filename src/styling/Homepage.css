@@ -17,7 +17,7 @@
   color: gray;
 }
 
-.container .btn {
+.container .template-btn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,10 +35,10 @@
   text-decoration: none;
 }
 
-.btn:hover {
+.template-btn:hover {
   background-color: rgb(4, 100, 220);
 }
 
-.container:hover .btn {
+.container:hover .template-btn {
   display: block;
 }
