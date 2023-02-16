@@ -5,7 +5,7 @@ import Inputcomponent from "./Inputcomponent";
 import Imageupload from "./Imageupload";
 import "../styles/Personalinfo.css";
 
-const Personalinfo = () => {
+const Personalinfo = ({ onNext }) => {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -108,6 +108,7 @@ const Personalinfo = () => {
 
               <Button
                 variant="contained"
+                onClick={onNext}
                 sx={{
                   fontFamily: "Poppins, sans-serif",
                   textTransform: "capitalize",

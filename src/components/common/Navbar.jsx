@@ -21,7 +21,7 @@ const theme = createTheme({
   },
 });
 
-function Navbar() {
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -113,6 +113,6 @@ function Navbar() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 export default Navbar;

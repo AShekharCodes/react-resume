@@ -49,6 +49,9 @@ const Inputcomponent = (props) => {
         rows={props.rows}
         placeholder={props.placeholder}
         inputProps={{ maxLength: props.limit }}
+        select={props.isSelect}
+        children={props.content}
+        defaultValue={""}
       />
     </div>
   );

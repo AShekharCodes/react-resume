@@ -19,6 +19,7 @@
 
 .MuiInputBase-input.MuiOutlinedInput-input {
   font-family: "Poppins", sans-serif;
+  font-size: 15px;
 }
 
 .MuiInputBase-input.MuiOutlinedInput-input::-webkit-outer-spin-button,
