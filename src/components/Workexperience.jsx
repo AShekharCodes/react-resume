@@ -18,6 +18,7 @@ const Workexperience = ({ onNext, onBack }) => {
   const remove = () => {
     setMoreExperience(false);
   };
+
   const experience2 = (
     <>
       <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -37,12 +38,16 @@ const Workexperience = ({ onNext, onBack }) => {
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6}>
         <Inputcomponent
-          type="text"
+          type="number"
           isSelect={true}
           label="Start Year"
           id="start-year"
           content={years.map((year) => (
-            <MenuItem key={year} value={year}>
+            <MenuItem
+              sx={{ fontFamily: "Poppins, sans-serif" }}
+              key={year}
+              value={year}
+            >
               {year}
             </MenuItem>
           ))}
@@ -50,12 +55,16 @@ const Workexperience = ({ onNext, onBack }) => {
       </Grid>
       <Grid item xs={12} sm={12} md={6} lg={6}>
         <Inputcomponent
-          type="text"
+          type="number"
           isSelect={true}
           label="End Year"
           id="end-year"
           content={years.map((year) => (
-            <MenuItem key={year} value={year}>
+            <MenuItem
+              sx={{ fontFamily: "Poppins, sans-serif" }}
+              key={year}
+              value={year}
+            >
               {year}
             </MenuItem>
           ))}
@@ -86,6 +95,7 @@ const Workexperience = ({ onNext, onBack }) => {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Work Experience</div>
           </Grid>
+          <hr className="top-line" />
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="sub-header">Experience 1</div>
           </Grid>
@@ -102,12 +112,16 @@ const Workexperience = ({ onNext, onBack }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              type="text"
+              type="number"
               isSelect={true}
               label="Start Year"
               id="start-year"
               content={years.map((year) => (
-                <MenuItem key={year} value={year}>
+                <MenuItem
+                  sx={{ fontFamily: "Poppins, sans-serif" }}
+                  key={year}
+                  value={year}
+                >
                   {year}
                 </MenuItem>
               ))}
@@ -115,12 +129,16 @@ const Workexperience = ({ onNext, onBack }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              type="text"
+              type="number"
               isSelect={true}
               label="End Year"
               id="end-year"
               content={years.map((year) => (
-                <MenuItem key={year} value={year}>
+                <MenuItem
+                  sx={{ fontFamily: "Poppins, sans-serif" }}
+                  key={year}
+                  value={year}
+                >
                   {year}
                 </MenuItem>
               ))}

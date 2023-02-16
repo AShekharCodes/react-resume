@@ -16,7 +16,38 @@
   text-align: left;
 }
 
-hr {
+.sub-header {
+  font-family: "Poppins", sans-serif;
+  padding: 10px 15px 5px 15px;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: left;
+}
+
+.sub-header-2 {
+  font-family: "Poppins", sans-serif;
+  padding: 20px 15px 5px 15px;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: left;
+}
+
+.top-line {
   width: 100%;
-  margin: 0px 15px;
+  margin: 0px 15px 15px 15px;
+}
+
+.back-next-btn {
+  display: flex;
+  justify-content: right;
+  padding: 15px;
+  gap: 10px;
+}
+
+.add-btn {
+  padding: 15px;
+}
+
+.remove-btn {
+  padding: 0px 15px 15px 15px;
 }
