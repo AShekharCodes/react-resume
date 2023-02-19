@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveTab } from "../redux/tabsSlice";
 import Navbar from "../components/common/Navbar";
 import Navigationtabs from "../components/Navigationtabs";
 import Personalinfo from "../components/Personalinfo";
@@ -9,18 +11,19 @@ import { Grid } from "@mui/material";
 import "../styles/Details.css";
 
 const Details = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const activeTab = useSelector((state) => state.tabs.activeTab);
+  const dispatch = useDispatch();
 
   const handleTabChange = (tab) => {
-    setActiveTab(tab);
+    dispatch(setActiveTab(tab));
   };
 
   const handleNext = () => {
-    setActiveTab(activeTab + 1);
+    dispatch(setActiveTab(activeTab + 1));
   };
 
   const handleBack = () => {
-    setActiveTab(activeTab - 1);
+    dispatch(setActiveTab(activeTab - 1));
   };
 
   return (
