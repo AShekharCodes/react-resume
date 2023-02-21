@@ -1,15 +1,27 @@
-.container {
-  position: relative;
+.template-grid {
+  padding: 30px;
 }
 
-.container:hover .template {
+.grid-item {
+  display: flex;
+  justify-content: center;
+}
+
+.template-btn-container {
+  position: relative;
+  width: 250px;
+  height: 370px;
+}
+
+.template-btn-container:hover .template {
   filter: brightness(65%);
   color: gray;
 }
 
 .template {
-  width: 300px;
-  height: 430px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
   box-shadow: 3px 3px 10px;
 }
 
@@ -17,29 +29,35 @@
   color: gray;
 }
 
-.container .template-btn {
+.template-btn-container .template-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+  border: none;
+  background: none;
+  padding: 10px 15px;
   background-color: rgb(7, 117, 219);
   color: white;
   font-size: 13px;
   font-family: "Poppins", sans-serif;
-  padding: 10px 15px;
-  border: none;
   cursor: pointer;
-  border-radius: 2px;
-  text-align: center;
+  border-radius: 3px;
   display: none;
-  text-decoration: none;
+}
+
+.template-btn-container:hover .template-btn {
+  display: block;
 }
 
 .template-btn:hover {
   background-color: rgb(4, 100, 220);
 }
 
-.container:hover .template-btn {
-  display: block;
+@media only screen and (max-width: 600px) {
+  .template-btn-container {
+    width: 300px;
+    height: 430px;
+  }
 }

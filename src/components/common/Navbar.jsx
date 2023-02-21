@@ -8,18 +8,8 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
 import logo from "../../images/almabetter_logo.png";
 import "../../styles/Navbar.css";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: grey[50],
-    },
-  },
-});
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -49,69 +39,71 @@ const Navbar = () => {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex" }}>
-        <AppBar component="nav">
-          <div className="toolbar-box">
-            <Toolbar className="toolbar">
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ display: { sm: "none" } }}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              <NavLink to="/">
-                <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
-              </NavLink>
-            </Toolbar>
-            <Box
-              className="box"
-              sx={{
-                display: { xs: "none", sm: "block" },
-              }}
+    <Box sx={{ display: "flex" }}>
+      <AppBar
+        component="nav"
+        color="transparent"
+        sx={{ backdropFilter: "blur(10px)" }}
+      >
+        <div className="toolbar-box">
+          <Toolbar className="toolbar">
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ display: { sm: "none" } }}
             >
-              <div className="navbar-btns">
-                <NavLink to="/" className="btn">
-                  Resume Templates
-                </NavLink>
-                <NavLink to="/my_resumes" className="btn">
-                  My Resumes
-                </NavLink>
-                <NavLink to="/about_us" className="btn">
-                  About Us
-                </NavLink>
-              </div>
-            </Box>
-          </div>
-        </AppBar>
-        <Box component="nav">
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true,
-            }}
+              <MenuIcon />
+            </IconButton>
+
+            <NavLink to="/">
+              <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
+            </NavLink>
+          </Toolbar>
+          <Box
+            className="box"
             sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: "200px",
-              },
+              display: { xs: "none", sm: "block" },
             }}
           >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box component="main" sx={{ p: 3 }}>
-          <Toolbar />
-        </Box>
+            <div className="navbar-btns">
+              <NavLink to="/" className="btn">
+                Resume Templates
+              </NavLink>
+              <NavLink to="/my_resumes" className="btn">
+                My Resumes
+              </NavLink>
+              <NavLink to="/about_us" className="btn">
+                About Us
+              </NavLink>
+            </div>
+          </Box>
+        </div>
+      </AppBar>
+      <Box component="nav">
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: "200px",
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
       </Box>
-    </ThemeProvider>
+      <Box component="main" sx={{ p: 3 }}>
+        <Toolbar />
+      </Box>
+    </Box>
   );
 };
 
