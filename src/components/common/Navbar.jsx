@@ -43,7 +43,7 @@ const Navbar = () => {
       <AppBar
         component="nav"
         color="transparent"
-        sx={{ backdropFilter: "blur(10px)" }}
+        sx={{ backdropFilter: "blur(12px)" }}
       >
         <div className="toolbar-box">
           <Toolbar className="toolbar">
@@ -95,6 +95,7 @@ const Navbar = () => {
               boxSizing: "border-box",
               width: "200px",
             },
+            backdropFilter: "blur(8px)",
           }}
         >
           {drawer}

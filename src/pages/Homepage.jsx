@@ -38,16 +38,7 @@ const Homepage = () => {
       </Box>
       <Grid className="template-grid" container spacing={0}>
         {[...Array(4)].map((_, i) => (
-          <Grid
-            key={i}
-            className="grid-item"
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
-            sx={{ marginBottom: "50px" }}
-          >
+          <Grid key={i} className="grid-item" item xs={12} sm={6} md={4} lg={3}>
             <div className="template-btn-container">
               <img src={template} className="template" alt="Template" />
               <button className="template-btn" onClick={fillDetails}>

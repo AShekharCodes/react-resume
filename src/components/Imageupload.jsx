@@ -38,7 +38,6 @@ const Imageupload = () => {
               width: "125px",
               height: "125px",
               margin: "5px 0px 5px 10px",
-              border: "0.5px solid rgb(92, 92, 92)",
               cursor: "pointer",
             }}
           />

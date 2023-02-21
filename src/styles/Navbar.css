@@ -1,7 +1,7 @@
 .drawerlogo {
   width: 120px;
   height: 30px;
-  margin: 14px 0px 5px -1px;
+  margin: 14px 0px 8px -1px;
   cursor: pointer;
   text-decoration: none;
 }
@@ -9,7 +9,7 @@
 .mainlogo {
   width: 130px;
   height: 33px;
-  margin-top: 6px;
+  margin-top: 4px;
   margin-left: 4px;
   cursor: pointer;
   text-decoration: none;
@@ -55,7 +55,7 @@
 }
 
 .list-btn {
-  font-size: 16px;
+  font-size: 17px;
   color: black;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
