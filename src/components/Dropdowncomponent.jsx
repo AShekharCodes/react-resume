@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { TextField } from "@mui/material";
-import "../styles/Inputcomponent.css";
+import { TextField, MenuItem } from "@mui/material";
 
-const Inputcomponent = (props) => {
+const Dropdowncomponent = (props) => {
+  const years = [];
+  for (let i = 2000; i <= 2023; i++) {
+    years.push(i);
+  }
+
   //to adjust input field height according to screen width
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -25,13 +29,6 @@ const Inputcomponent = (props) => {
     setIsFocused(false);
   };
 
-  //to prevent number input types from incrementing or decrementing using up/down arrow keys
-  const handleKeyDown = (event) => {
-    if (event.keyCode === 38 || event.keyCode === 40) {
-      event.preventDefault();
-    }
-  };
-
   return (
     <div className="input-div">
       <label className={`label ${isFocused ? "focused" : ""}`}>
@@ -40,29 +37,26 @@ const Inputcomponent = (props) => {
       <TextField
         size={screenWidth < 1100 ? "small" : "medium"}
         variant="outlined"
-        id={props.id}
         name={props.name}
-        type={props.type}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onKeyDown={props.isKeyDown ? handleKeyDown : null}
-        multiline={props.isMultiline}
-        rows={props.rows}
-        inputProps={{ maxLength: props.limit }}
+        id={props.id}
+        select
         value={props.value}
         onChange={props.onChange}
-      />
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      >
+        {years.map((year) => (
+          <MenuItem
+            key={year}
+            value={year}
+            sx={{ fontFamily: "Poppins, sans-serif" }}
+          >
+            {year}
+          </MenuItem>
+        ))}
+      </TextField>
     </div>
   );
 };
 
-Inputcomponent.defaultProps = {
-  isKeyDown: false,
-  isMultiline: false,
-  rows: 1,
-  limit: 100,
-  value: "",
-  name: "",
-};
-
-export default Inputcomponent;
+export default Dropdowncomponent;

@@ -1,0 +1,13 @@
+#Template1 {
+  padding: 20px;
+  height: 802px;
+  width: 555px;
+  border: 1px solid rgb(214, 214, 214);
+}
+
+.content {
+  border: 1px solid rgb(158, 157, 157);
+  width: 533px;
+  height: 780px;
+  padding: 10px;
+}

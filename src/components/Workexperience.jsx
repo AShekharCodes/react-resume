@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Inputcomponent from "./Inputcomponent";
-import { Paper, Grid, MenuItem, Button } from "@mui/material";
+import Dropdowncomponent from "./Dropdowncomponent";
+import { useSelector, useDispatch } from "react-redux";
+import { addInfo, resetInfo } from "../redux/personalInfoSlice";
+import { Paper, Grid, Button, Snackbar, Alert } from "@mui/material";
 import "../styles/Workexperience.css";
 
 const Workexperience = ({ onNext, onBack }) => {
+  const dispatch = useDispatch();
+  const workExperience = useSelector((state) => state.workExperience.value);
+  const [state, setState] = useState(workExperience);
   const [moreExperience, setMoreExperience] = useState(1);
-
-  const years = [
-    2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011,
-    2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,
-  ];
 
   const addExperience = () => {
     setMoreExperience(2);
@@ -19,9 +20,79 @@ const Workexperience = ({ onNext, onBack }) => {
     setMoreExperience(1);
   };
 
+  const reset = () => {
+    setState({
+      jobtitle1: "",
+      organisation1: "",
+      startyear1: "",
+      endyear1: "",
+      jobtitle2: "",
+      organisation2: "",
+      startyear2: "",
+      endyear2: "",
+    });
+    dispatch(resetInfo());
+    localStorage.removeItem("workExperience");
+  };
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.target);
+    const formData = {
+      jobtitle1: data.get("jobtitle1"),
+      organisation1: data.get("organisation1"),
+      startyear1: data.get("startyear1"),
+      endyear1: data.get("endyear1"),
+      jobtitle2: data.get("jobtitle2"),
+      organisation2: data.get("organisation2"),
+      startyear2: data.get("startyear2"),
+      endyear2: data.get("endyear2"),
+    };
+
+    // Validate form fields
+    const isFormValid =
+      state.jobtitle1 &&
+      state.organisation1 &&
+      state.startyear1 &&
+      state.endyear1;
+    // state.jobtitle2 &&
+    // state.organisation2 &&
+    // state.startyear2 &&
+    // state.endyear2;
+
+    if (!isFormValid) {
+      setSnackbarOpen(true);
+      return;
+    }
+    dispatch(addInfo(formData));
+    localStorage.setItem("workExperience", JSON.stringify(formData));
+    console.log(formData);
+    onNext();
+  };
+
+  useEffect(() => {
+    // Load from localStorage
+    const savedPersonalInfo = localStorage.getItem("workExperience");
+    if (savedPersonalInfo) {
+      const parsedPersonalInfo = JSON.parse(savedPersonalInfo);
+      dispatch(addInfo(parsedPersonalInfo));
+      setState(parsedPersonalInfo);
+    }
+  }, [dispatch]);
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
     <>
-      <Paper elevation={3}>
+      <Paper component="form" onSubmit={handleSubmit} elevation={3}>
         <Grid className="grid" container spacing={0}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Work Experience</div>
@@ -36,55 +107,44 @@ const Workexperience = ({ onNext, onBack }) => {
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
                   type="text"
+                  name={`jobtitle${i + 1}`}
                   label="Job Title"
                   id={`job-title-${i + 1}`}
+                  onChange={handleChange}
+                  value={state[`jobtitle${i + 1}`]}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
                   type="text"
-                  label="Organization Name"
-                  id={`organization-name-${i + 1}`}
+                  name={`organisation${i + 1}`}
+                  label="Organisation Name"
+                  id={`organisation-name-${i + 1}`}
+                  onChange={handleChange}
+                  value={state[`organisation${i + 1}`]}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <Inputcomponent
-                  type="number"
-                  isSelect={true}
+                <Dropdowncomponent
                   label="Start Year"
+                  name={`startyear${i + 1}`}
                   id={`start-year-${i + 1}`}
-                  content={years.map((year) => (
-                    <MenuItem
-                      sx={{ fontFamily: "Poppins, sans-serif" }}
-                      key={year}
-                      value={year}
-                    >
-                      {year}
-                    </MenuItem>
-                  ))}
+                  value={state[`startyear${i + 1}`]}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <Inputcomponent
-                  type="number"
-                  isSelect={true}
+                <Dropdowncomponent
                   label="End Year"
+                  name={`endyear${i + 1}`}
                   id={`end-year-${i + 1}`}
-                  content={years.map((year) => (
-                    <MenuItem
-                      sx={{ fontFamily: "Poppins, sans-serif" }}
-                      key={year}
-                      value={year}
-                    >
-                      {year}
-                    </MenuItem>
-                  ))}
+                  value={state[`endyear${i + 1}`]}
+                  onChange={handleChange}
                 />
               </Grid>
-              {moreExperience === 2 && <hr className="conditional-line" />}
+              <hr />
             </React.Fragment>
           ))}
-          <hr />
           <Grid item xs={12} sm={12} ms={12} lg={12}>
             {moreExperience === 1 && (
               <div className="add-remove-btn">
@@ -140,6 +200,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 Back
               </Button>
               <Button
+                onClick={reset}
                 variant="outlined"
                 sx={{
                   fontFamily: "Poppins, sans-serif",
@@ -157,8 +218,8 @@ const Workexperience = ({ onNext, onBack }) => {
               </Button>
 
               <Button
+                type="submit"
                 variant="contained"
-                onClick={onNext}
                 sx={{
                   fontFamily: "Poppins, sans-serif",
                   textTransform: "capitalize",
@@ -174,6 +235,20 @@ const Workexperience = ({ onNext, onBack }) => {
               </Button>
             </div>
           </Grid>
+          <Snackbar
+            open={snackbarOpen}
+            onClose={handleCloseSnackbar}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            autoHideDuration={5000}
+          >
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Please fill all the fields!
+            </Alert>
+          </Snackbar>
         </Grid>
       </Paper>
     </>
