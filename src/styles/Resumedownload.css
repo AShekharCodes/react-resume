@@ -1,8 +1,9 @@
 .MuiTypography-root.save-label {
   font-family: "Poppins", sans-serif;
   font-size: 19px;
-  color: rgb(54, 54, 54);
+  color: rgb(32, 32, 32);
   margin-bottom: 15px;
+  font-weight: bold;
 }
 
 .back-save {

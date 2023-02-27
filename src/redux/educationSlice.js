@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const educationInfo = {
-  type1: "",
-  university1: "",
-  degree1: "",
-  score1: "",
-  startyear1: "",
-  endyear1: "",
-  type2: "",
-  university2: "",
-  degree2: "",
-  score2: "",
-  startyear2: "",
-  endyear2: "",
+  type1: "UG",
+  university1: "Bharati Vidyapeeth",
+  degree1: "BCA",
+  score1: "8",
+  startyear1: "2019",
+  endyear1: "2022",
+  type2: "PG",
+  university2: "Bharati Vidyapeeth",
+  degree2: "MCA",
+  score2: "9.45",
+  startyear2: "2023",
+  endyear2: "2023",
 };
 
 const educationSlice = createSlice({

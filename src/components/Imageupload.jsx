@@ -1,11 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Button, Avatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { addImg, removeImg } from "../redux/personalInfoSlice";
+import { useDispatch } from "react-redux";
 import "../styles/Imageupload.css";
 
 const Imageupload = () => {
-  const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
+  const dispatch = useDispatch();
+  const imageStorage = localStorage.getItem("profileimage");
 
   const uploadImage = () => {
     fileInputRef.current.click();
@@ -17,14 +20,16 @@ const Imageupload = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        setImage(reader.result);
+        dispatch(addImg(reader.result));
+        localStorage.setItem("profileimage", reader.result);
         fileInputRef.current.value = null;
       };
     }
   };
 
   const removeImage = () => {
-    setImage(null);
+    dispatch(removeImg());
+    localStorage.removeItem("profileimage");
   };
 
   return (
@@ -32,7 +37,7 @@ const Imageupload = () => {
       <div className="img-component">
         <div className="avatar-cross">
           <Avatar
-            src={image}
+            src={imageStorage}
             onClick={uploadImage}
             sx={{
               width: "125px",
@@ -41,7 +46,7 @@ const Imageupload = () => {
               cursor: "pointer",
             }}
           />
-          {image ? (
+          {imageStorage ? (
             <CloseIcon sx={{ cursor: "pointer" }} onClick={removeImage} />
           ) : null}
         </div>
@@ -62,7 +67,7 @@ const Imageupload = () => {
             fontSize: "13px",
           }}
         >
-          {image ? "Change profile photo" : "Upload profile photo"}
+          {imageStorage ? "Change profile photo" : "Upload profile photo"}
         </Button>
       </div>
     </>

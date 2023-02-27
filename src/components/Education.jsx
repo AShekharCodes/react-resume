@@ -111,7 +111,8 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
-                <Dropdowncomponent
+                <Inputcomponent
+                  type="text"
                   label="Type"
                   name={`type${i + 1}`}
                   id={`type-${i + 1}`}

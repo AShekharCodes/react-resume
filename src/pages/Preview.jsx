@@ -28,12 +28,12 @@ const Preview = () => {
             Resume Preview
           </Typography>
         </Grid>
-        <Grid item className="preview-component" xs={12} sm={9} md={9} lg={9}>
+        <Grid item className="preview-component" xs={12} sm={12} md={9} lg={9}>
           <div className="preview-div">
             <Template1 />
           </div>
         </Grid>
-        <Grid item className="save-component" xs={12} sm={3} md={3} lg={3}>
+        <Grid item className="save-component" xs={12} sm={12} md={3} lg={3}>
           <div className="save-div">
             <Resumedownload />
           </div>

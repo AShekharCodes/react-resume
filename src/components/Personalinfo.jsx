@@ -33,6 +33,7 @@ const Personalinfo = ({ onNext }) => {
     });
     dispatch(resetInfo());
     localStorage.removeItem("personalInfo");
+    localStorage.removeItem("profileimage");
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);

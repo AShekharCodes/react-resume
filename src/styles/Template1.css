@@ -1,13 +1,140 @@
 #Template1 {
-  padding: 20px;
+  padding: 19px;
   height: 802px;
   width: 555px;
   border: 1px solid rgb(214, 214, 214);
+  font-family: "courier";
+  box-shadow: 2px 2px 8px;
 }
 
 .content {
-  border: 1px solid rgb(158, 157, 157);
+  border: 3px solid rgb(255, 207, 185);
   width: 533px;
   height: 780px;
-  padding: 10px;
+  padding: 8px;
+}
+
+.location {
+  flex-grow: 1;
+  padding-right: 10px;
+}
+
+.header-section {
+  display: flex;
+  padding: 0;
+  background-color: rgb(255, 207, 185);
+  padding: 10px 0px;
+}
+
+.personal {
+  margin: 0px 10px;
+  flex-grow: 1;
+}
+
+.name {
+  font-size: 23px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mobile {
+  font-size: 14px;
+  margin-top: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.address,
+.city,
+.state,
+.postalcode {
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.line {
+  border-top: 3px solid rgb(255, 207, 185);
+  width: 30%;
+  display: inline-block;
+}
+
+.text {
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.jobtitle {
+  text-align: left;
+  font-weight: bolder;
+  font-size: 16px;
+}
+.organisation {
+  text-align: left;
+  font-weight: bold;
+}
+
+.years {
+  text-align: left;
+  font-weight: bold;
+}
+
+.type,
+.degree,
+.university,
+.score {
+  text-align: left;
+  font-weight: bold;
+}
+
+.education-section {
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.education-container {
+  display: flex;
+  padding: 0px 10px;
+  gap: 150px;
+}
+
+.experience-section {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.experience-container {
+  display: flex;
+  padding: 0px 10px;
+  gap: 150px;
+}
+
+.skills-section {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.skills-container {
+  display: flex;
+  padding: 0px 10px;
+  gap: 220px;
+}
+
+.skill {
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }

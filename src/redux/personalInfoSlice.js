@@ -4,13 +4,14 @@ const personalInfo = {
   profileimage: "",
   firstname: "Abhishek",
   lastname: "Shekhar",
-  email: "",
-  mobile: "",
-  address: "",
-  city: "",
-  state: "",
-  postalcode: "",
-  objective: "",
+  email: "abhishek123shekhar@gmail.com",
+  mobile: "9654991140",
+  address: "Gyan Khand-4, Indirapuram",
+  city: "Ghaziabad",
+  state: "Uttar Pradesh",
+  postalcode: "201014",
+  objective:
+    "To learn about react and become a successful frontend developer and deliver fruitful results to those whom I am working with.",
 };
 
 const personalInfoSlice = createSlice({
