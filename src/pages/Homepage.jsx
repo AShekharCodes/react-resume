@@ -2,14 +2,20 @@ import React from "react";
 import Navbar from "../components/common/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
+import { setTemplateId } from "../redux/templateSlice";
+import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import template from "../images/resume_template.png";
 import "../styles/Homepage.css";
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const fillDetails = () => {
+  const fillDetails = (templateId) => {
+    dispatch(setTemplateId(templateId));
+    localStorage.setItem("templateId", templateId);
+    console.log(templateId);
     navigate("/details");
   };
 
@@ -37,16 +43,50 @@ const Homepage = () => {
         </Typography>
       </Box>
       <Grid className="template-grid" container spacing={0}>
-        {[...Array(4)].map((_, i) => (
-          <Grid key={i} className="grid-item" item xs={12} sm={6} md={4} lg={3}>
-            <div className="template-btn-container">
-              <img src={template} className="template" alt="Template" />
-              <button className="template-btn" onClick={fillDetails}>
-                Use Template
-              </button>
-            </div>
-          </Grid>
-        ))}
+        <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
+          <div className="template-btn-container">
+            <img src={template} className="template" alt="Template" />
+            <button
+              className="template-btn"
+              onClick={() => fillDetails("#Template1")}
+            >
+              Use Template
+            </button>
+          </div>
+        </Grid>
+        <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
+          <div className="template-btn-container">
+            <img src={template} className="template" alt="Template" />
+            <button
+              className="template-btn"
+              onClick={() => fillDetails("#Template2")}
+            >
+              Use Template
+            </button>
+          </div>
+        </Grid>
+        <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
+          <div className="template-btn-container">
+            <img src={template} className="template" alt="Template" />
+            <button
+              className="template-btn"
+              onClick={() => fillDetails("#Template3")}
+            >
+              Use Template
+            </button>
+          </div>
+        </Grid>
+        <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
+          <div className="template-btn-container">
+            <img src={template} className="template" alt="Template" />
+            <button
+              className="template-btn"
+              onClick={() => fillDetails("#Template4")}
+            >
+              Use Template
+            </button>
+          </div>
+        </Grid>
       </Grid>
     </>
   );

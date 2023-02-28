@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import { Button, Avatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { addImg, removeImg } from "../redux/personalInfoSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/Imageupload.css";
 
 const Imageupload = () => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const imageStorage = localStorage.getItem("profileimage");
-
+  const personal = useSelector((state) => state.personalInfo.value);
   const uploadImage = () => {
     fileInputRef.current.click();
   };
@@ -28,8 +28,8 @@ const Imageupload = () => {
   };
 
   const removeImage = () => {
-    dispatch(removeImg());
     localStorage.removeItem("profileimage");
+    dispatch(removeImg());
   };
 
   return (
@@ -37,7 +37,7 @@ const Imageupload = () => {
       <div className="img-component">
         <div className="avatar-cross">
           <Avatar
-            src={imageStorage}
+            src={personal.profileimage || imageStorage}
             onClick={uploadImage}
             sx={{
               width: "125px",

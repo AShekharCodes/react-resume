@@ -4,6 +4,7 @@ import personalInfoReducer from "./personalInfoSlice";
 import workExperienceReducer from "./workExperienceSlice";
 import educationReducer from "./educationSlice";
 import skillsReducer from "./skillsSlice";
+import templateReducer from "./templateSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     workExperience: workExperienceReducer,
     education: educationReducer,
     skills: skillsReducer,
+    template: templateReducer,
   },
 });
 

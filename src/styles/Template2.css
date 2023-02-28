@@ -1,13 +1,13 @@
-#Template1 {
+#Template2 {
   padding: 20px;
   height: 802px;
   width: 555px;
-  font-family: "Courier";
+  font-family: "Helvetica";
   box-shadow: 2px 2px 8px;
 }
 
-.content-1 {
-  border: 3px solid rgb(255, 207, 185);
+.content-2 {
+  border: 3px solid rgb(250, 106, 39);
   width: 533px;
   height: 780px;
   padding: 8px;
@@ -18,10 +18,10 @@
   padding-right: 10px;
 }
 
-.personal-data-1 {
+.personal-data-2 {
   display: flex;
   padding: 0;
-  background-color: rgb(255, 207, 185);
+  background-color: rgb(250, 106, 39);
   padding: 10px 0px;
 }
 
@@ -68,8 +68,8 @@
   font-weight: bold;
 }
 
-.line-1 {
-  border-top: 3px solid rgb(255, 207, 185);
+.line-2 {
+  border-top: 3px solid rgb(250, 106, 39);
   width: 30%;
   display: inline-block;
 }

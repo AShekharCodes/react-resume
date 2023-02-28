@@ -4,11 +4,11 @@ const skillsInfo = {
   skill1: "React js",
   skill2: "Mongo DB",
   skill3: "Javascript",
-  skill4: "Automation",
+  skill4: "HTML",
   skill5: "Web development",
-  skill6: "Mobile Development",
-  skill7: "Java spring boot",
-  skill8: "Kubernetes",
+  skill6: "CSS",
+  skill7: "Node js",
+  skill8: "Express js",
 };
 
 const skillsSlice = createSlice({

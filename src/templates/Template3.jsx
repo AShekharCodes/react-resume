@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Avatar } from "@mui/material";
-import "../styles/Template1.css";
+import "../styles/Template3.css";
 
-const Template1 = () => {
+const Template3 = () => {
   const imageStorage = localStorage.getItem("profileimage");
   const personal = useSelector((state) => state.personalInfo.value);
   const personalStorage = localStorage.getItem("personalInfo");
@@ -15,10 +15,10 @@ const Template1 = () => {
   const skillsStorage = localStorage.getItem("skills");
 
   return (
-    <div id="Template1">
-      <div className="content-1">
+    <div id="Template3">
+      <div className="content-3">
         <div className="personal-section">
-          <div className="personal-data-1">
+          <div className="personal-data-3">
             {imageStorage && (
               <div className="profile-img">
                 <Avatar
@@ -52,9 +52,9 @@ const Template1 = () => {
           </div>
         </div>
         <div className="experience-section">
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="text">Experience</div>
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="experience-container">
             <div className="experience-content">
               <p className="jobtitle">
@@ -90,9 +90,9 @@ const Template1 = () => {
           </div>
         </div>
         <div className="education-section">
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="text">Education</div>
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="education-container">
             <div className="education-content">
               <p className="type">
@@ -140,9 +140,9 @@ const Template1 = () => {
           </div>
         </div>
         <div className="skills-section">
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="text">Skills</div>
-          <div className="line-1"></div>
+          <div className="line-3"></div>
           <div className="skills-container">
             <div className="skills-content">
               <p className="skill">{skills.skill1 || skillsStorage.skill1}</p>
@@ -163,4 +163,4 @@ const Template1 = () => {
   );
 };
 
-export default Template1;
+export default Template3;

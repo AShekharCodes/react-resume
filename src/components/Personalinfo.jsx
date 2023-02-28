@@ -20,7 +20,6 @@ const Personalinfo = ({ onNext }) => {
 
   const reset = () => {
     setState({
-      profileimage: "",
       firstname: "",
       lastname: "",
       email: "",
@@ -194,13 +193,13 @@ const Personalinfo = ({ onNext }) => {
               type="text"
               isMultiline={true}
               rows={5}
-              limit={400}
+              limit={200}
               label="Objective"
               name="objective"
               id="objective"
               value={state.objective}
               onChange={handleChange}
-              placeholder="Max 400 characters"
+              placeholder="Max 200 characters"
             />
           </Grid>
           <hr />

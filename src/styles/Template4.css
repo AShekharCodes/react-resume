@@ -1,4 +1,4 @@
-#Template1 {
+#Template4 {
   padding: 20px;
   height: 802px;
   width: 555px;
@@ -6,8 +6,8 @@
   box-shadow: 2px 2px 8px;
 }
 
-.content-1 {
-  border: 3px solid rgb(255, 207, 185);
+.content-4 {
+  border: 3px solid rgb(50, 137, 252);
   width: 533px;
   height: 780px;
   padding: 8px;
@@ -18,10 +18,10 @@
   padding-right: 10px;
 }
 
-.personal-data-1 {
+.personal-data-4 {
   display: flex;
   padding: 0;
-  background-color: rgb(255, 207, 185);
+  background-color: rgb(50, 137, 252);
   padding: 10px 0px;
 }
 
@@ -68,8 +68,8 @@
   font-weight: bold;
 }
 
-.line-1 {
-  border-top: 3px solid rgb(255, 207, 185);
+.line-4 {
+  border-top: 3px solid rgb(50, 137, 252);
   width: 30%;
   display: inline-block;
 }

@@ -11,7 +11,7 @@ const personalInfo = {
   state: "Uttar Pradesh",
   postalcode: "201014",
   objective:
-    "To learn about react and become a successful frontend developer and deliver fruitful results to those whom I am working with.",
+    "To learn about web development and become a successful frontend developer and deliver fruitful results to those whom I am working with.",
 };
 
 const personalInfoSlice = createSlice({

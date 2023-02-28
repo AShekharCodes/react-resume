@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setActiveTab } from "../redux/tabsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
 import jsPDF from "jspdf";
 import "../styles/Resumedownload.css";
 
 const Resumedownload = () => {
+  const templateId = useSelector((state) => state.template.templateId);
+  const templateIdStorage = localStorage.getItem("templateId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState("");
@@ -18,12 +20,12 @@ const Resumedownload = () => {
       unit: "pt",
       format: "a4",
     });
-    var source = document.querySelector("#Template1");
+    var source = document.querySelector(templateId || templateIdStorage);
     doc.html(source, {
       callback: function (pdf) {
         var pageCount = doc.internal.getNumberOfPages();
         pdf.deletePage(pageCount);
-        let regex = /^[a-zA-Z\s]+$/;
+        let regex = /^[a-zA-Z\d\s]+$/;
         if (!regex.test(fileName)) {
           setSnackbarOpen(true);
           return;

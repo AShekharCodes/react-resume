@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const experienceInfo = {
   jobtitle1: "Frontend Developer",
-  organisation1: "Summer Blues",
-  startyear1: "2018",
-  endyear1: "2019",
-  jobtitle2: "React native developer",
-  organisation2: "Deloitte",
-  startyear2: "2018",
-  endyear2: "2019",
+  organisation1: "AlmaBetter",
+  startyear1: "2022",
+  endyear1: "2023",
+  jobtitle2: "Backend Developer",
+  organisation2: "AlmaBetter",
+  startyear2: "2022",
+  endyear2: "2023",
 };
 
 const workExperienceSlice = createSlice({
