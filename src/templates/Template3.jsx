@@ -6,13 +6,13 @@ import "../styles/Template3.css";
 const Template3 = () => {
   const imageStorage = localStorage.getItem("profileimage");
   const personal = useSelector((state) => state.personalInfo.value);
-  const personalStorage = localStorage.getItem("personalInfo");
+  const personalStorage = JSON.parse(localStorage.getItem("personalInfo"));
   const experience = useSelector((state) => state.workExperience.value);
-  const experienceStorage = localStorage.getItem("workExperience");
+  const experienceStorage = JSON.parse(localStorage.getItem("workExperience"));
   const education = useSelector((state) => state.education.value);
-  const educationStorage = localStorage.getItem("education");
+  const educationStorage = JSON.parse(localStorage.getItem("education"));
   const skills = useSelector((state) => state.skills.value);
-  const skillsStorage = localStorage.getItem("skills");
+  const skillsStorage = JSON.parse(localStorage.getItem("skills"));
 
   return (
     <div id="Template3">
@@ -55,7 +55,7 @@ const Template3 = () => {
           <div className="line-3"></div>
           <div className="text">Experience</div>
           <div className="line-3"></div>
-          <div className="experience-container">
+          <div className="experience-container-3">
             <div className="experience-content">
               <p className="jobtitle">
                 {experience.jobtitle1 || experienceStorage.jobtitle1}
@@ -68,10 +68,10 @@ const Template3 = () => {
                 {experience.endyear1 || experienceStorage.endyear1}
               </p>
             </div>
-            {experience.jobtitle2 &&
-            experience.organisation2 &&
-            experience.startyear2 &&
-            experience.endyear2 !== "" ? (
+            {experienceStorage.jobtitle2 &&
+            experienceStorage.organisation2 &&
+            experienceStorage.startyear2 &&
+            experienceStorage.endyear2 !== "" ? (
               <div className="experience-content">
                 <p className="jobtitle">
                   {experience.jobtitle2 || experienceStorage.jobtitle2}
@@ -93,7 +93,7 @@ const Template3 = () => {
           <div className="line-3"></div>
           <div className="text">Education</div>
           <div className="line-3"></div>
-          <div className="education-container">
+          <div className="education-container-3">
             <div className="education-content">
               <p className="type">
                 {education.type1 || educationStorage.type1}
@@ -112,12 +112,12 @@ const Template3 = () => {
                 {education.endyear1 || educationStorage.endyear1}
               </p>
             </div>
-            {(education.type2 &&
-              education.university2 &&
-              education.degree2 &&
-              education.score2 &&
-              education.startyear2 &&
-              education.endyear2) !== "" && (
+            {(educationStorage.type2 &&
+              educationStorage.university2 &&
+              educationStorage.degree2 &&
+              educationStorage.score2 &&
+              educationStorage.startyear2 &&
+              educationStorage.endyear2) !== "" && (
               <div className="education-content">
                 <p className="type">
                   {education.type2 || educationStorage.type2}
@@ -143,7 +143,7 @@ const Template3 = () => {
           <div className="line-3"></div>
           <div className="text">Skills</div>
           <div className="line-3"></div>
-          <div className="skills-container">
+          <div className="skills-container-3">
             <div className="skills-content">
               <p className="skill">{skills.skill1 || skillsStorage.skill1}</p>
               <p className="skill">{skills.skill2 || skillsStorage.skill2}</p>

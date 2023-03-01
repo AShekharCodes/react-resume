@@ -21,7 +21,7 @@
 .personal-data-3 {
   display: flex;
   padding: 0;
-  background-color: rgb(247, 25, 25);
+  background-color: rgb(255, 26, 26);
   padding: 10px 0px;
 }
 
@@ -109,10 +109,11 @@
   text-align: center;
 }
 
-.education-container {
+.education-container-3 {
   display: flex;
   padding: 0px 10px;
   gap: 150px;
+  background-color: rgb(247, 95, 95);
 }
 
 .experience-section {
@@ -120,10 +121,11 @@
   margin: 10px 0px;
 }
 
-.experience-container {
+.experience-container-3 {
   display: flex;
   padding: 0px 10px;
   gap: 150px;
+  background-color: rgb(255, 47, 47);
 }
 
 .skills-section {
@@ -131,10 +133,11 @@
   margin: 10px 0px;
 }
 
-.skills-container {
+.skills-container-3 {
   display: flex;
   padding: 0px 10px;
   gap: 220px;
+  background-color: rgb(255, 147, 147);
 }
 
 .skill {

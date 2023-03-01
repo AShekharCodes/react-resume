@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { setActiveTab } from "../redux/tabsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
+import CheckCircleOutlineTwoToneIcon from "@mui/icons-material/CheckCircleOutlineTwoTone";
 import jsPDF from "jspdf";
 import "../styles/Resumedownload.css";
 
@@ -31,6 +32,17 @@ const Resumedownload = () => {
           return;
         }
         pdf.save(`${fileName}.pdf`);
+
+        setTimeout(() => {
+          var messageBox = document.querySelector(".alert-box");
+          messageBox.style.visibility = "visible";
+          setTimeout(() => {
+            // clear local storage
+            localStorage.clear();
+            // Redirect to homepage
+            window.location.replace("/");
+          }, 1500);
+        }, 1500);
       },
     });
   };
@@ -87,6 +99,22 @@ const Resumedownload = () => {
         >
           Save
         </Button>
+      </div>
+      <div className="alert-box">
+        <div className="alert-content">
+          <CheckCircleOutlineTwoToneIcon
+            sx={{
+              textAlign: "center",
+              color: "rgb(44, 109, 230)",
+              width: "45px",
+              height: "45px",
+            }}
+          />
+
+          <div className="alert-message">
+            Your Resume has been Successfully Saved
+          </div>
+        </div>
       </div>
       <Snackbar
         open={snackbarOpen}

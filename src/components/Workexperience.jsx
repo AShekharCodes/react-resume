@@ -45,26 +45,22 @@ const Workexperience = ({ onNext, onBack }) => {
 
     const data = new FormData(event.target);
     const formData = {
-      jobtitle1: data.get("jobtitle1"),
-      organisation1: data.get("organisation1"),
-      startyear1: data.get("startyear1"),
-      endyear1: data.get("endyear1"),
-      jobtitle2: data.get("jobtitle2"),
-      organisation2: data.get("organisation2"),
-      startyear2: data.get("startyear2"),
-      endyear2: data.get("endyear2"),
+      jobtitle1: data.get("jobtitle1") || "",
+      organisation1: data.get("organisation1") || "",
+      startyear1: data.get("startyear1") || "",
+      endyear1: data.get("endyear1") || "",
+      jobtitle2: data.get("jobtitle2") || "",
+      organisation2: data.get("organisation2") || "",
+      startyear2: data.get("startyear2") || "",
+      endyear2: data.get("endyear2") || "",
     };
 
     // Validate form fields
     const isFormValid =
-      state.jobtitle1 &&
-      state.organisation1 &&
-      state.startyear1 &&
-      state.endyear1;
-    // state.jobtitle2 &&
-    // state.organisation2 &&
-    // state.startyear2 &&
-    // state.endyear2;
+      formData.jobtitle1 &&
+      formData.organisation1 &&
+      formData.startyear1 &&
+      formData.endyear1;
 
     if (!isFormValid) {
       setSnackbarOpen(true);

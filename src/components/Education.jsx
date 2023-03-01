@@ -49,28 +49,28 @@ const Education = ({ onNext, onBack }) => {
 
     const data = new FormData(event.target);
     const formData = {
-      type1: data.get("type1"),
-      university1: data.get("university1"),
-      degree1: data.get("degree1"),
-      score1: data.get("score1"),
-      startyear1: data.get("startyear1"),
-      endyear1: data.get("endyear1"),
-      type2: data.get("type2"),
-      university2: data.get("university2"),
-      degree2: data.get("degree2"),
-      score2: data.get("score2"),
-      startyear2: data.get("startyear2"),
-      endyear2: data.get("endyear2"),
+      type1: data.get("type1") || "",
+      university1: data.get("university1") || "",
+      degree1: data.get("degree1") || "",
+      score1: data.get("score1") || "",
+      startyear1: data.get("startyear1") || "",
+      endyear1: data.get("endyear1") || "",
+      type2: data.get("type2") || "",
+      university2: data.get("university2") || "",
+      degree2: data.get("degree2") || "",
+      score2: data.get("score2") || "",
+      startyear2: data.get("startyear2") || "",
+      endyear2: data.get("endyear2") || "",
     };
 
     // Validate form fields
     const isFormValid =
-      state.type1 &&
-      state.university1 &&
-      state.degree1 &&
-      state.score1 &&
-      state.startyear1 &&
-      state.endyear1;
+      formData.type1 &&
+      formData.university1 &&
+      formData.degree1 &&
+      formData.score1 &&
+      formData.startyear1 &&
+      formData.endyear1;
 
     if (!isFormValid) {
       setSnackbarOpen(true);

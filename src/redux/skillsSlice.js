@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const skillsInfo = {
-  skill1: "React js",
-  skill2: "Mongo DB",
-  skill3: "Javascript",
-  skill4: "HTML",
-  skill5: "Web development",
-  skill6: "CSS",
-  skill7: "Node js",
-  skill8: "Express js",
+  skill1: "",
+  skill2: "",
+  skill3: "",
+  skill4: "",
+  skill5: "",
+  skill6: "",
+  skill7: "",
+  skill8: "",
 };
 
 const skillsSlice = createSlice({

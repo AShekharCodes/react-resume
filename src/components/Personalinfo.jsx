@@ -11,25 +11,14 @@ const Personalinfo = ({ onNext }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const personalInfo = useSelector((state) => state.personalInfo.value);
+  const [state, setState] = useState(personalInfo);
 
   const goBack = () => {
     navigate("/");
   };
 
-  const [state, setState] = useState(personalInfo);
-
   const reset = () => {
-    setState({
-      firstname: "",
-      lastname: "",
-      email: "",
-      mobile: "",
-      address: "",
-      city: "",
-      state: "",
-      postalcode: "",
-      objective: "",
-    });
+    setState(personalInfo);
     dispatch(resetInfo());
     localStorage.removeItem("personalInfo");
     localStorage.removeItem("profileimage");
@@ -46,28 +35,28 @@ const Personalinfo = ({ onNext }) => {
 
     const data = new FormData(event.target);
     const formData = {
-      firstname: data.get("firstname"),
-      lastname: data.get("lastname"),
-      email: data.get("email"),
-      mobile: data.get("mobile"),
-      address: data.get("address"),
-      city: data.get("city"),
-      state: data.get("state"),
-      postalcode: data.get("postalcode"),
-      objective: data.get("objective"),
+      firstname: data.get("firstname") || "",
+      lastname: data.get("lastname") || "",
+      email: data.get("email") || "",
+      mobile: data.get("mobile") || "",
+      address: data.get("address") || "",
+      city: data.get("city" || ""),
+      state: data.get("state") || "",
+      postalcode: data.get("postalcode") || "",
+      objective: data.get("objective") || "",
     };
 
     // Validate form fields
     const isFormValid =
-      state.firstname &&
-      state.lastname &&
-      state.email &&
-      state.mobile &&
-      state.address &&
-      state.city &&
-      state.state &&
-      state.postalcode &&
-      state.objective;
+      formData.firstname &&
+      formData.lastname &&
+      formData.email &&
+      formData.mobile &&
+      formData.address &&
+      formData.city &&
+      formData.state &&
+      formData.postalcode &&
+      formData.objective;
 
     if (!isFormValid) {
       setSnackbarOpen(true);

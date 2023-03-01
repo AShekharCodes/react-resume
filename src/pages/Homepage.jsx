@@ -5,7 +5,10 @@ import { Typography, Box } from "@mui/material";
 import { setTemplateId } from "../redux/templateSlice";
 import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
-import template from "../images/resume_template.png";
+import template1 from "../images/Template1.png";
+import template2 from "../images/Template2.png";
+import template3 from "../images/Template3.png";
+import template4 from "../images/Template4.png";
 import "../styles/Homepage.css";
 
 const Homepage = () => {
@@ -45,7 +48,7 @@ const Homepage = () => {
       <Grid className="template-grid" container spacing={0}>
         <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
           <div className="template-btn-container">
-            <img src={template} className="template" alt="Template" />
+            <img src={template1} className="template" alt="Template" />
             <button
               className="template-btn"
               onClick={() => fillDetails("#Template1")}
@@ -56,7 +59,7 @@ const Homepage = () => {
         </Grid>
         <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
           <div className="template-btn-container">
-            <img src={template} className="template" alt="Template" />
+            <img src={template2} className="template" alt="Template" />
             <button
               className="template-btn"
               onClick={() => fillDetails("#Template2")}
@@ -67,7 +70,7 @@ const Homepage = () => {
         </Grid>
         <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
           <div className="template-btn-container">
-            <img src={template} className="template" alt="Template" />
+            <img src={template3} className="template" alt="Template" />
             <button
               className="template-btn"
               onClick={() => fillDetails("#Template3")}
@@ -78,7 +81,7 @@ const Homepage = () => {
         </Grid>
         <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
           <div className="template-btn-container">
-            <img src={template} className="template" alt="Template" />
+            <img src={template4} className="template" alt="Template" />
             <button
               className="template-btn"
               onClick={() => fillDetails("#Template4")}

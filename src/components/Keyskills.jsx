@@ -30,16 +30,7 @@ const Keyskills = ({ onBack }) => {
   };
 
   const reset = () => {
-    setState({
-      skill1: "",
-      skill2: "",
-      skill3: "",
-      skill4: "",
-      skill5: "",
-      skill6: "",
-      skill7: "",
-      skill8: "",
-    });
+    setState(skills);
     dispatch(resetInfo());
     localStorage.removeItem("skills");
   };
@@ -54,19 +45,19 @@ const Keyskills = ({ onBack }) => {
 
     const data = new FormData(event.target);
     const formData = {
-      skill1: data.get("skill1"),
-      skill2: data.get("skill2"),
-      skill3: data.get("skill3"),
-      skill4: data.get("skill4"),
-      skill5: data.get("skill5"),
-      skill6: data.get("skill6"),
-      skill7: data.get("skill7"),
-      skill8: data.get("skill8"),
+      skill1: data.get("skill1") || "",
+      skill2: data.get("skill2") || "",
+      skill3: data.get("skill3") || "",
+      skill4: data.get("skill4") || "",
+      skill5: data.get("skill5") || "",
+      skill6: data.get("skill6") || "",
+      skill7: data.get("skill7") || "",
+      skill8: data.get("skill8") || "",
     };
 
     // Validate form fields
     const isFormValid =
-      state.skill1 && state.skill2 && state.skill3 && state.skill4;
+      formData.skill1 && formData.skill2 && formData.skill3 && formData.skill4;
 
     if (!isFormValid) {
       setSnackbarOpen(true);

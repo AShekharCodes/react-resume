@@ -109,10 +109,11 @@
   text-align: center;
 }
 
-.education-container {
+.education-container-4 {
   display: flex;
   padding: 0px 10px;
   gap: 150px;
+  background-color: rgb(123, 179, 253);
 }
 
 .experience-section {
@@ -120,10 +121,11 @@
   margin: 10px 0px;
 }
 
-.experience-container {
+.experience-container-4 {
   display: flex;
   padding: 0px 10px;
   gap: 150px;
+  background-color: rgb(82, 157, 255);
 }
 
 .skills-section {
@@ -131,10 +133,11 @@
   margin: 10px 0px;
 }
 
-.skills-container {
+.skills-container-4 {
   display: flex;
   padding: 0px 10px;
   gap: 220px;
+  background-color: rgb(183, 213, 252);
 }
 
 .skill {
