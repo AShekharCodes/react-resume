@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addInfo, removeImg, resetInfo } from "../redux/personalInfoSlice";
 import { useNavigate } from "react-router-dom";
-import { addInfo, resetInfo } from "../redux/personalInfoSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { Paper, Grid, Button, Snackbar, Alert } from "@mui/material";
+import { Paper, Grid, Button } from "@mui/material";
 import Inputcomponent from "./Inputcomponent";
 import Imageupload from "./Imageupload";
 import "../styles/Personalinfo.css";
@@ -10,80 +11,50 @@ import "../styles/Personalinfo.css";
 const Personalinfo = ({ onNext }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const personalInfo = useSelector((state) => state.personalInfo.value);
-  const [state, setState] = useState(personalInfo);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const goBack = () => {
     navigate("/");
+    localStorage.clear();
+    dispatch(resetInfo());
+    dispatch(removeImg());
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    localStorage.setItem("personalInfo", JSON.stringify(data));
+    dispatch(addInfo(data));
+    console.log(data);
   };
 
   const reset = () => {
-    setState(personalInfo);
-    dispatch(resetInfo());
     localStorage.removeItem("personalInfo");
     localStorage.removeItem("profileimage");
-  };
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.target);
-    const formData = {
-      firstname: data.get("firstname") || "",
-      lastname: data.get("lastname") || "",
-      email: data.get("email") || "",
-      mobile: data.get("mobile") || "",
-      address: data.get("address") || "",
-      city: data.get("city" || ""),
-      state: data.get("state") || "",
-      postalcode: data.get("postalcode") || "",
-      objective: data.get("objective") || "",
-    };
-
-    // Validate form fields
-    const isFormValid =
-      formData.firstname &&
-      formData.lastname &&
-      formData.email &&
-      formData.mobile &&
-      formData.address &&
-      formData.city &&
-      formData.state &&
-      formData.postalcode &&
-      formData.objective;
-
-    if (!isFormValid) {
-      setSnackbarOpen(true);
-      return;
-    }
-    dispatch(addInfo(formData));
-    localStorage.setItem("personalInfo", JSON.stringify(formData));
-    console.log(formData);
-    onNext();
+    window.location.reload();
   };
 
   useEffect(() => {
-    // Load personal info from localStorage
-    const savedPersonalInfo = localStorage.getItem("personalInfo");
-    if (savedPersonalInfo) {
-      const parsedPersonalInfo = JSON.parse(savedPersonalInfo);
-      dispatch(addInfo(parsedPersonalInfo));
-      setState(parsedPersonalInfo);
+    const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
+    if (personalInfo) {
+      Object.keys(personalInfo).forEach((key) => {
+        setValue(key, personalInfo[key]);
+      });
     }
-  }, [dispatch]);
-
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
+  }, [setValue]);
 
   return (
     <>
-      <Paper component="form" onSubmit={handleSubmit} elevation={3}>
+      <Paper
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate //to remove default email validation popup message
+        elevation={3}
+      >
         <Grid className="grid" container spacing={0}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Personal Details</div>
@@ -96,98 +67,146 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="text"
               label="First name"
               name="firstname"
-              id="first-name"
-              value={state.firstname}
-              onChange={handleChange}
+              rules={{
+                required: "First name is required!",
+                maxLength: { value: 20, message: "Max 20 characters!" },
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Invalid name!",
+                },
+              }}
+              error={errors.firstname}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="text"
               label="Last name"
               name="lastname"
-              id="last-name"
-              value={state.lastname}
-              onChange={handleChange}
+              rules={{
+                required: "Last name is required!",
+                maxLength: { value: 20, message: "Max 20 characters!" },
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Invalid name!",
+                },
+              }}
+              error={errors.lastname}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="email"
               label="Email"
               name="email"
-              id="email"
-              value={state.email}
-              onChange={handleChange}
+              rules={{
+                required: "Email is required!",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email!",
+                },
+                maxLength: { value: 30, message: "Max 30 characters!" },
+              }}
+              error={errors.email}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="number"
               isKeyDown={true}
               label="Mobile"
               name="mobile"
-              id="mobile"
-              value={state.mobile}
-              onChange={handleChange}
+              rules={{
+                required: "Mobile number is required!",
+                minLength: { value: 10, message: "Min 10 digits!" },
+                maxLength: { value: 10, message: "Max 10 digits!" },
+              }}
+              error={errors.mobile}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
+              control={control}
               type="text"
               label="Address"
               name="address"
-              id="address"
-              value={state.address}
-              onChange={handleChange}
+              rules={{
+                required: "Address is required!",
+                maxLength: { value: 50, message: "Max 50 characters!" },
+              }}
+              error={errors.address}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="text"
               label="City"
               name="city"
-              id="city"
-              value={state.city}
-              onChange={handleChange}
+              rules={{
+                required: "City is required!",
+                maxLength: { value: 15, message: "Max 15 characters" },
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Invalid city!",
+                },
+              }}
+              error={errors.city}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="text"
               label="State"
               name="state"
-              id="state"
-              value={state.state}
-              onChange={handleChange}
+              rules={{
+                required: "State is required!",
+                maxLength: { value: 15, message: "Max 15 characters!" },
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Invalid state!",
+                },
+              }}
+              error={errors.state}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              control={control}
               type="number"
               isKeyDown={true}
               label="Postal code"
               name="postalcode"
-              id="postal-code"
-              value={state.postalcode}
-              onChange={handleChange}
+              rules={{
+                required: "Postal code is required!",
+                minLength: { value: 6, message: "Min 6 digits!" },
+                maxLength: { value: 6, message: "Max 6 digits!" },
+              }}
+              error={errors.postalcode}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
+              control={control}
               type="text"
               isMultiline={true}
               rows={5}
-              limit={200}
               label="Objective"
               name="objective"
-              id="objective"
-              value={state.objective}
-              onChange={handleChange}
+              rules={{
+                required: "Objective is required!",
+                maxLength: { value: 200, message: "Max 200 characters!" },
+              }}
               placeholder="Max 200 characters"
+              error={errors.objective}
             />
           </Grid>
           <hr />
@@ -245,20 +264,6 @@ const Personalinfo = ({ onNext }) => {
               </Button>
             </div>
           </Grid>
-          <Snackbar
-            open={snackbarOpen}
-            onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            autoHideDuration={5000}
-          >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-            >
-              Please fill all the fields!
-            </Alert>
-          </Snackbar>
         </Grid>
       </Paper>
     </>
