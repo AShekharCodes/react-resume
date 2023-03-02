@@ -39,7 +39,6 @@ const Inputcomponent = (props) => {
       </label>
       <TextField
         size={screenWidth < 1100 ? "small" : "medium"}
-        variant="outlined"
         id={props.id}
         name={props.name}
         type={props.type}

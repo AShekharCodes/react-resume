@@ -4,6 +4,7 @@ import { Avatar } from "@mui/material";
 import "../styles/Template1.css";
 
 const Template1 = () => {
+  //Here, I have fetched both values from redux and localstorage. So, in case of reload, the data will not be lost
   const imageStorage = localStorage.getItem("profileimage");
   const personal = useSelector((state) => state.personalInfo.value);
   const personalStorage = JSON.parse(localStorage.getItem("personalInfo"));

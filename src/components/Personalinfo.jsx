@@ -12,6 +12,7 @@ const Personalinfo = ({ onNext }) => {
   const dispatch = useDispatch();
   const personalInfo = useSelector((state) => state.personalInfo.value);
   const [state, setState] = useState(personalInfo);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const goBack = () => {
     navigate("/");
@@ -23,8 +24,6 @@ const Personalinfo = ({ onNext }) => {
     localStorage.removeItem("personalInfo");
     localStorage.removeItem("profileimage");
   };
-
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
