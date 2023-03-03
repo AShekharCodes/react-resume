@@ -17,8 +17,11 @@ const personalInfoSlice = createSlice({
   name: "personalInfo",
   initialState: { value: personalInfo },
   reducers: {
-    addInfo: (state, action) => {
+    addPersonalInfo: (state, action) => {
       state.value = action.payload;
+    },
+    resetPersonalInfo: (state) => {
+      state.value = personalInfo;
     },
     addImg: (state, action) => {
       state.value.profileimage = action.payload;
@@ -26,12 +29,9 @@ const personalInfoSlice = createSlice({
     removeImg: (state) => {
       state.value.profileimage = "";
     },
-    resetInfo: (state) => {
-      state.value = personalInfo;
-    },
   },
 });
 
-export const { addInfo, addImg, removeImg, resetInfo } =
+export const { addPersonalInfo, resetPersonalInfo, addImg, removeImg } =
   personalInfoSlice.actions;
 export default personalInfoSlice.reducer;

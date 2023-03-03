@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addExperienceInfo } from "../redux/workExperienceSlice";
 import Inputcomponent from "./Inputcomponent";
 import Dropdowncomponent from "./Dropdowncomponent";
-import { useSelector, useDispatch } from "react-redux";
-import { addInfo, resetInfo } from "../redux/personalInfoSlice";
-import { Paper, Grid, Button, Snackbar, Alert } from "@mui/material";
+import { Paper, Grid, Button } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import "../styles/Workexperience.css";
 
 const Workexperience = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
-  const workExperience = useSelector((state) => state.workExperience.value);
-  const [state, setState] = useState(workExperience);
+
+  const years = [];
+  for (let year = 2010; year <= 2023; year++) {
+    years.push({ value: year.toString(), label: year.toString() });
+  }
   const [moreExperience, setMoreExperience] = useState(1);
 
   const addExperience = () => {
@@ -20,75 +25,42 @@ const Workexperience = ({ onNext, onBack }) => {
     setMoreExperience(1);
   };
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const onSubmit = (data) => {
+    localStorage.setItem("workExperience", JSON.stringify(data));
+    dispatch(addExperienceInfo(data));
+    setIsSubmitted(true);
+    console.log(data);
+    setTimeout(() => {
+      onNext();
+    }, 1500);
+  };
+
   const reset = () => {
-    setState({
-      jobtitle1: "",
-      organisation1: "",
-      startyear1: "",
-      endyear1: "",
-      jobtitle2: "",
-      organisation2: "",
-      startyear2: "",
-      endyear2: "",
-    });
-    dispatch(resetInfo());
     localStorage.removeItem("workExperience");
-  };
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.target);
-    const formData = {
-      jobtitle1: data.get("jobtitle1") || "",
-      organisation1: data.get("organisation1") || "",
-      startyear1: data.get("startyear1") || "",
-      endyear1: data.get("endyear1") || "",
-      jobtitle2: data.get("jobtitle2") || "",
-      organisation2: data.get("organisation2") || "",
-      startyear2: data.get("startyear2") || "",
-      endyear2: data.get("endyear2") || "",
-    };
-
-    // Validate form fields
-    const isFormValid =
-      formData.jobtitle1 &&
-      formData.organisation1 &&
-      formData.startyear1 &&
-      formData.endyear1;
-
-    if (!isFormValid) {
-      setSnackbarOpen(true);
-      return;
-    }
-    dispatch(addInfo(formData));
-    localStorage.setItem("workExperience", JSON.stringify(formData));
-    console.log(formData);
-    onNext();
+    window.location.reload();
   };
 
   useEffect(() => {
-    // Load from localStorage
-    const savedPersonalInfo = localStorage.getItem("workExperience");
-    if (savedPersonalInfo) {
-      const parsedPersonalInfo = JSON.parse(savedPersonalInfo);
-      dispatch(addInfo(parsedPersonalInfo));
-      setState(parsedPersonalInfo);
+    const personalInfo = JSON.parse(localStorage.getItem("workExperience"));
+    if (personalInfo) {
+      Object.keys(personalInfo).forEach((key) => {
+        setValue(key, personalInfo[key]);
+      });
     }
-  }, [dispatch]);
-
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
+  }, [setValue]);
 
   return (
     <>
-      <Paper component="form" onSubmit={handleSubmit} elevation={3}>
+      <Paper component="form" onSubmit={handleSubmit(onSubmit)} elevation={3}>
         <Grid className="grid" container spacing={0}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Work Experience</div>
@@ -102,40 +74,50 @@ const Workexperience = ({ onNext, onBack }) => {
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
+                  submitted={isSubmitted}
+                  control={control}
                   type="text"
                   name={`jobtitle${i + 1}`}
                   label="Job Title"
-                  id={`job-title-${i + 1}`}
-                  onChange={handleChange}
-                  value={state[`jobtitle${i + 1}`]}
+                  error={errors[`jobtitle${i + 1}`]}
+                  rules={{
+                    required: "Job title is required!",
+                    maxLength: { value: 20, message: "Max 20 characters!" },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
+                  submitted={isSubmitted}
+                  control={control}
                   type="text"
                   name={`organisation${i + 1}`}
                   label="Organisation Name"
-                  id={`organisation-name-${i + 1}`}
-                  onChange={handleChange}
-                  value={state[`organisation${i + 1}`]}
+                  error={errors[`organisation${i + 1}`]}
+                  rules={{
+                    required: "Organisation name is required!",
+                    maxLength: { value: 20, message: "Max 20 characters!" },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
+                  options={years}
+                  submitted={isSubmitted}
+                  control={control}
                   label="Start Year"
                   name={`startyear${i + 1}`}
-                  id={`start-year-${i + 1}`}
-                  value={state[`startyear${i + 1}`]}
-                  onChange={handleChange}
+                  rules={{ required: "Start year is required!" }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
+                  options={years}
+                  submitted={isSubmitted}
+                  control={control}
                   label="End Year"
                   name={`endyear${i + 1}`}
-                  id={`end-year-${i + 1}`}
-                  value={state[`endyear${i + 1}`]}
-                  onChange={handleChange}
+                  rules={{ required: "End year is required!" }}
                 />
               </Grid>
               <hr />
@@ -213,38 +195,46 @@ const Workexperience = ({ onNext, onBack }) => {
                 Reset
               </Button>
 
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  fontFamily: "Poppins, sans-serif",
-                  textTransform: "capitalize",
-                  fontSize: "12px",
-                  padding: "7px 36px",
-                  fontWeight: "bold",
-                  border: " 2px solid #1976D2",
-                  ":hover": { border: "2px solid #1976D2", boxShadow: "none" },
-                  boxShadow: "none",
-                }}
-              >
-                Next
-              </Button>
+              {isSubmitted ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    padding: "2px 35px",
+                    backgroundColor: "rgb(72, 143, 43)",
+                    border: "2px solid rgb(72, 143, 43)",
+                    boxShadow: "none",
+                    ":hover": {
+                      border: "2px solid rgb(72, 143, 43)",
+                      boxShadow: "none",
+                      backgroundColor: "rgb(72, 143, 43)",
+                    },
+                  }}
+                >
+                  <DoneIcon sx={{ width: "30px", height: "30px" }} />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    fontFamily: "Poppins, sans-serif",
+                    textTransform: "capitalize",
+                    fontSize: "12px",
+                    padding: "7px 36.5px",
+                    fontWeight: "bold",
+                    border: " 2px solid #1976D2",
+                    ":hover": {
+                      border: "2px solid #1976D2",
+                      boxShadow: "none",
+                    },
+                    boxShadow: "none",
+                  }}
+                >
+                  Next
+                </Button>
+              )}
             </div>
           </Grid>
-          <Snackbar
-            open={snackbarOpen}
-            onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            autoHideDuration={5000}
-          >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-            >
-              Please fill all the fields!
-            </Alert>
-          </Snackbar>
         </Grid>
       </Paper>
     </>

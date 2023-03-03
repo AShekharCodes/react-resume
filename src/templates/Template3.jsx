@@ -69,10 +69,7 @@ const Template3 = () => {
                 {experience.endyear1 || experienceStorage.endyear1}
               </p>
             </div>
-            {experienceStorage.jobtitle2 &&
-            experienceStorage.organisation2 &&
-            experienceStorage.startyear2 &&
-            experienceStorage.endyear2 !== "" ? (
+            {experienceStorage.jobtitle2 ? (
               <div className="experience-content">
                 <p className="jobtitle">
                   {experience.jobtitle2 || experienceStorage.jobtitle2}
@@ -113,12 +110,7 @@ const Template3 = () => {
                 {education.endyear1 || educationStorage.endyear1}
               </p>
             </div>
-            {(educationStorage.type2 &&
-              educationStorage.university2 &&
-              educationStorage.degree2 &&
-              educationStorage.score2 &&
-              educationStorage.startyear2 &&
-              educationStorage.endyear2) !== "" && (
+            {educationStorage.type2 ? (
               <div className="education-content">
                 <p className="type">
                   {education.type2 || educationStorage.type2}
@@ -137,6 +129,8 @@ const Template3 = () => {
                   {education.endyear2 || educationStorage.endyear2}
                 </p>
               </div>
+            ) : (
+              ""
             )}
           </div>
         </div>

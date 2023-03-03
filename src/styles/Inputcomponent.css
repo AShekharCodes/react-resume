@@ -17,6 +17,14 @@
   color: rgb(44, 109, 230);
 }
 
+.label.error {
+  color: #d32f2f;
+}
+
+.label.success {
+  color: rgb(72, 143, 43);
+}
+
 .MuiInputBase-input.MuiOutlinedInput-input {
   font-family: "Poppins", sans-serif;
   font-size: 15px;

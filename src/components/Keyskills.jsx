@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Inputcomponent from "./Inputcomponent";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addInfo, resetInfo } from "../redux/educationSlice";
-import { Paper, Grid, Button, Snackbar, Alert } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addSkillInfo } from "../redux/skillsSlice";
+import { Paper, Grid, Button } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import "../styles/Keyskills.css";
 
 const Keyskills = ({ onBack }) => {
   const [numInputs, setNumInputs] = useState(4);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const skills = useSelector((state) => state.skills.value);
-  const [state, setState] = useState(skills);
-
-  const goToPreview = () => {
-    navigate("/preview");
-  };
-
   const addSkill = () => {
     if (numInputs < 8) {
       setNumInputs(numInputs + 1);
@@ -29,63 +24,42 @@ const Keyskills = ({ onBack }) => {
     }
   };
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const onSubmit = (data) => {
+    localStorage.setItem("skills", JSON.stringify(data));
+    dispatch(addSkillInfo(data));
+    setIsSubmitted(true);
+    console.log(data);
+    setTimeout(() => {
+      navigate("/preview");
+    }, 1500);
+  };
+
   const reset = () => {
-    setState(skills);
-    dispatch(resetInfo());
     localStorage.removeItem("skills");
-  };
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.target);
-    const formData = {
-      skill1: data.get("skill1") || "",
-      skill2: data.get("skill2") || "",
-      skill3: data.get("skill3") || "",
-      skill4: data.get("skill4") || "",
-      skill5: data.get("skill5") || "",
-      skill6: data.get("skill6") || "",
-      skill7: data.get("skill7") || "",
-      skill8: data.get("skill8") || "",
-    };
-
-    // Validate form fields
-    const isFormValid =
-      formData.skill1 && formData.skill2 && formData.skill3 && formData.skill4;
-
-    if (!isFormValid) {
-      setSnackbarOpen(true);
-      return;
-    }
-    dispatch(addInfo(formData));
-    localStorage.setItem("skills", JSON.stringify(formData));
-    goToPreview();
-    console.log(formData);
+    window.location.reload();
   };
 
   useEffect(() => {
-    // Load from localStorage
-    const savedPersonalInfo = localStorage.getItem("skills");
-    if (savedPersonalInfo) {
-      const parsedPersonalInfo = JSON.parse(savedPersonalInfo);
-      dispatch(addInfo(parsedPersonalInfo));
-      setState(parsedPersonalInfo);
+    const personalInfo = JSON.parse(localStorage.getItem("skills"));
+    if (personalInfo) {
+      Object.keys(personalInfo).forEach((key) => {
+        setValue(key, personalInfo[key]);
+      });
     }
-  }, [dispatch]);
-
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
+  }, [setValue]);
 
   return (
     <>
-      <Paper component="form" onSubmit={handleSubmit} elevation={3}>
+      <Paper component="form" onSubmit={handleSubmit(onSubmit)} elevation={3}>
         <Grid className="grid" container spacing={0}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Key Skills</div>
@@ -93,12 +67,16 @@ const Keyskills = ({ onBack }) => {
           {[...Array(numInputs)].map((_, i) => (
             <Grid item key={i + 1} xs={12} sm={12} md={6} lg={6}>
               <Inputcomponent
+                submitted={isSubmitted}
+                control={control}
                 type="text"
                 name={`skill${i + 1}`}
-                value={state[`skill${i + 1}`]}
                 label={`Skill ${i + 1}`}
-                id={`skill-${i + 1}`}
-                onChange={handleChange}
+                error={errors[`skill${i + 1}`]}
+                rules={{
+                  required: "Skill is required!",
+                  maxLength: { value: 15, message: "Max 15 characters!" },
+                }}
               />
             </Grid>
           ))}
@@ -169,38 +147,46 @@ const Keyskills = ({ onBack }) => {
                 Reset
               </Button>
 
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  fontFamily: "Poppins, sans-serif",
-                  textTransform: "capitalize",
-                  fontSize: "12px",
-                  padding: "7px 26px",
-                  fontWeight: "bold",
-                  border: " 2px solid #1976D2",
-                  ":hover": { border: "2px solid #1976D2", boxShadow: "none" },
-                  boxShadow: "none",
-                }}
-              >
-                Preview
-              </Button>
+              {isSubmitted ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    padding: "2px 35px",
+                    backgroundColor: "rgb(72, 143, 43)",
+                    border: "2px solid rgb(72, 143, 43)",
+                    boxShadow: "none",
+                    ":hover": {
+                      border: "2px solid rgb(72, 143, 43)",
+                      boxShadow: "none",
+                      backgroundColor: "rgb(72, 143, 43)",
+                    },
+                  }}
+                >
+                  <DoneIcon sx={{ width: "30px", height: "30px" }} />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    fontFamily: "Poppins, sans-serif",
+                    textTransform: "capitalize",
+                    fontSize: "12px",
+                    padding: "7px 26px",
+                    fontWeight: "bold",
+                    border: " 2px solid #1976D2",
+                    ":hover": {
+                      border: "2px solid #1976D2",
+                      boxShadow: "none",
+                    },
+                    boxShadow: "none",
+                  }}
+                >
+                  Preview
+                </Button>
+              )}
             </div>
           </Grid>
-          <Snackbar
-            open={snackbarOpen}
-            onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            autoHideDuration={5000}
-          >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-            >
-              Please fill all the fields!
-            </Alert>
-          </Snackbar>
         </Grid>
       </Paper>
     </>

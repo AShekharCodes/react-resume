@@ -19,14 +19,14 @@ const educationSlice = createSlice({
   name: "educationInfo",
   initialState: { value: educationInfo },
   reducers: {
-    addInfo: (state, action) => {
+    addEducationInfo: (state, action) => {
       state.value = action.payload;
     },
-    resetInfo: (state) => {
+    resetEducationInfo: (state) => {
       state.value = educationInfo;
     },
   },
 });
 
-export const { addInfo, resetInfo } = educationSlice.actions;
+export const { addEducationInfo, resetEducationInfo } = educationSlice.actions;
 export default educationSlice.reducer;

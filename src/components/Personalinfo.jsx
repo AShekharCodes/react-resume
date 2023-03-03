@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addInfo, removeImg, resetInfo } from "../redux/personalInfoSlice";
+import {
+  addPersonalInfo,
+  removeImg,
+  resetPersonalInfo,
+} from "../redux/personalInfoSlice";
 import { useNavigate } from "react-router-dom";
 import { Paper, Grid, Button } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import Inputcomponent from "./Inputcomponent";
 import Imageupload from "./Imageupload";
 import "../styles/Personalinfo.css";
@@ -15,7 +20,7 @@ const Personalinfo = ({ onNext }) => {
   const goBack = () => {
     navigate("/");
     localStorage.clear();
-    dispatch(resetInfo());
+    dispatch(resetPersonalInfo());
     dispatch(removeImg());
   };
 
@@ -26,10 +31,16 @@ const Personalinfo = ({ onNext }) => {
     setValue,
   } = useForm();
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const onSubmit = (data) => {
     localStorage.setItem("personalInfo", JSON.stringify(data));
-    dispatch(addInfo(data));
+    dispatch(addPersonalInfo(data));
+    setIsSubmitted(true);
     console.log(data);
+    setTimeout(() => {
+      onNext();
+    }, 1500);
   };
 
   const reset = () => {
@@ -67,6 +78,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               label="First name"
@@ -84,6 +96,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               label="Last name"
@@ -101,6 +114,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="email"
               label="Email"
@@ -118,6 +132,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="number"
               isKeyDown={true}
@@ -127,12 +142,14 @@ const Personalinfo = ({ onNext }) => {
                 required: "Mobile number is required!",
                 minLength: { value: 10, message: "Min 10 digits!" },
                 maxLength: { value: 10, message: "Max 10 digits!" },
+                pattern: { value: /^[0-9]{10}$/, message: "Invalid number!" },
               }}
               error={errors.mobile}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               label="Address"
@@ -146,6 +163,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               label="City"
@@ -163,6 +181,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               label="State"
@@ -180,6 +199,7 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="number"
               isKeyDown={true}
@@ -189,12 +209,14 @@ const Personalinfo = ({ onNext }) => {
                 required: "Postal code is required!",
                 minLength: { value: 6, message: "Min 6 digits!" },
                 maxLength: { value: 6, message: "Max 6 digits!" },
+                pattern: { value: /^[0-9]{6}$/, message: "Invalid number!" },
               }}
               error={errors.postalcode}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
+              submitted={isSubmitted}
               control={control}
               type="text"
               isMultiline={true}
@@ -246,22 +268,44 @@ const Personalinfo = ({ onNext }) => {
                 Reset
               </Button>
 
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  fontFamily: "Poppins, sans-serif",
-                  textTransform: "capitalize",
-                  fontSize: "12px",
-                  padding: "7px 36px",
-                  fontWeight: "bold",
-                  border: " 2px solid #1976D2",
-                  ":hover": { border: "2px solid #1976D2", boxShadow: "none" },
-                  boxShadow: "none",
-                }}
-              >
-                Next
-              </Button>
+              {isSubmitted ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    padding: "2px 35px",
+                    backgroundColor: "rgb(72, 143, 43)",
+                    border: "2px solid rgb(72, 143, 43)",
+                    boxShadow: "none",
+                    ":hover": {
+                      border: "2px solid rgb(72, 143, 43)",
+                      boxShadow: "none",
+                      backgroundColor: "rgb(72, 143, 43)",
+                    },
+                  }}
+                >
+                  <DoneIcon sx={{ width: "30px", height: "30px" }} />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    fontFamily: "Poppins, sans-serif",
+                    textTransform: "capitalize",
+                    fontSize: "12px",
+                    padding: "7px 36.5px",
+                    fontWeight: "bold",
+                    border: " 2px solid #1976D2",
+                    ":hover": {
+                      border: "2px solid #1976D2",
+                      boxShadow: "none",
+                    },
+                    boxShadow: "none",
+                  }}
+                >
+                  Next
+                </Button>
+              )}
             </div>
           </Grid>
         </Grid>

@@ -15,14 +15,14 @@ const skillsSlice = createSlice({
   name: "skillsInfo",
   initialState: { value: skillsInfo },
   reducers: {
-    addInfo: (state, action) => {
+    addSkillInfo: (state, action) => {
       state.value = action.payload;
     },
-    resetInfo: (state) => {
+    resetSkillInfo: (state) => {
       state.value = skillsInfo;
     },
   },
 });
 
-export const { addInfo, resetInfo } = skillsSlice.actions;
+export const { addSkillInfo, resetSkillInfo } = skillsSlice.actions;
 export default skillsSlice.reducer;

@@ -18,6 +18,11 @@ const Navbar = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const clear = () => {
+    localStorage.clear();
+    window.location.replace("/");
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <NavLink to="/">
@@ -25,7 +30,7 @@ const Navbar = () => {
       </NavLink>
       <Divider />
       <div className="list-container">
-        <NavLink to="/" className="list-btn">
+        <NavLink to="/" onClick={clear} className="list-btn">
           Resume Templates
         </NavLink>
         <NavLink to="/my_resumes" className="list-btn">
@@ -58,7 +63,12 @@ const Navbar = () => {
             </IconButton>
 
             <NavLink to="/">
-              <img src={logo} className="mainlogo" alt="AlmaBetter-logo" />
+              <img
+                src={logo}
+                onClick={clear}
+                className="mainlogo"
+                alt="AlmaBetter-logo"
+              />
             </NavLink>
           </Toolbar>
           <Box
@@ -68,7 +78,7 @@ const Navbar = () => {
             }}
           >
             <div className="navbar-btns">
-              <NavLink to="/" className="btn">
+              <NavLink to="/" onClick={clear} className="btn">
                 Resume Templates
               </NavLink>
               <NavLink to="/my_resumes" className="btn">

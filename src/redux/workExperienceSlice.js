@@ -15,14 +15,15 @@ const workExperienceSlice = createSlice({
   name: "experienceInfo",
   initialState: { value: experienceInfo },
   reducers: {
-    addInfo: (state, action) => {
+    addExperienceInfo: (state, action) => {
       state.value = action.payload;
     },
-    resetInfo: (state) => {
+    resetExperienceInfo: (state) => {
       state.value = experienceInfo;
     },
   },
 });
 
-export const { addInfo, resetInfo } = workExperienceSlice.actions;
+export const { addExperienceInfo, resetExperienceInfo } =
+  workExperienceSlice.actions;
 export default workExperienceSlice.reducer;

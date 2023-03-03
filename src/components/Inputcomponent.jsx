@@ -13,6 +13,7 @@ const Inputcomponent = ({
   isMultiline,
   rows,
   rules,
+  submitted,
 }) => {
   //to adjust input field height according to screen width
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -24,6 +25,18 @@ const Inputcomponent = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  //to change color of label when focusing and removing focus
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
 
   //to prevent number input types from incrementing or decrementing using up/down arrow keys
   const handleKeyDown = (event) => {
@@ -43,13 +56,23 @@ const Inputcomponent = ({
         fieldState: { error },
       }) => (
         <div className="input-div">
-          <label className={`label ${value ? "focused" : ""}`}>{label}</label>
+          <label
+            className={`label ${isFocused ? "focused" : ""} ${
+              error ? "error" : ""
+            } ${submitted && value ? "success" : ""}`}
+          >
+            {label}
+          </label>
           <TextField
             size={screenWidth < 1100 ? "small" : "medium"}
             name={name}
             type={type}
             placeholder={placeholder}
-            onBlur={onBlur}
+            onBlur={(e) => {
+              onBlur(e);
+              handleBlur();
+            }}
+            onFocus={handleFocus}
             onKeyDown={isKeyDown ? handleKeyDown : null}
             multiline={isMultiline}
             rows={rows}
