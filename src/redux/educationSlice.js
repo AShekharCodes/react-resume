@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// initial values for education data
 const educationInfo = {
   type1: "",
   university1: "",
@@ -15,6 +16,7 @@ const educationInfo = {
   endyear2: "",
 };
 
+// reducer and actions
 const educationSlice = createSlice({
   name: "educationInfo",
   initialState: { value: educationInfo },
@@ -28,5 +30,6 @@ const educationSlice = createSlice({
   },
 });
 
+// exporting reducers and actions
 export const { addEducationInfo, resetEducationInfo } = educationSlice.actions;
 export default educationSlice.reducer;

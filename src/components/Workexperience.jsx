@@ -8,9 +8,10 @@ import { Paper, Grid, Button } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import "../styles/Workexperience.css";
 
-const Workexperience = ({ onNext, onBack }) => {
+const Workexperience = ({ onNext, onBack, validated }) => {
   const dispatch = useDispatch();
 
+  // items that are to be used in dropdown input fields
   const startYears = [];
   for (let year = 2010; year <= 2023; year++) {
     startYears.push({ value: year.toString(), label: year.toString() });
@@ -27,6 +28,7 @@ const Workexperience = ({ onNext, onBack }) => {
     setMoreExperience(2);
   };
 
+  // remove button functionality for removing extra input field and its datas
   const removeExperience = () => {
     setMoreExperience(1);
     setValue("jobtitle2", "");
@@ -35,6 +37,7 @@ const Workexperience = ({ onNext, onBack }) => {
     setValue("endyear2", "");
   };
 
+  // useForm hook
   const {
     control,
     handleSubmit,
@@ -44,21 +47,27 @@ const Workexperience = ({ onNext, onBack }) => {
 
   const [isSubmit, setIsSubmit] = useState(false);
 
+  // form submission functionality
   const onSubmit = (data) => {
+    // sets form data into sessionstorage and redux
     sessionStorage.setItem("workExperience", JSON.stringify(data));
     dispatch(addExperienceInfo(data));
     setIsSubmit(true);
+    // sets form validated to true
+    validated();
     console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);
   };
 
+  // reset button functionality
   const reset = () => {
     sessionStorage.removeItem("workExperience");
     window.location.reload();
   };
 
+  // for persisting values in fields after reload
   useEffect(() => {
     const experience = JSON.parse(sessionStorage.getItem("workExperience"));
     if (experience) {
@@ -86,6 +95,7 @@ const Workexperience = ({ onNext, onBack }) => {
               </Grid>
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* job title input field with validation rules */}
                 <Inputcomponent
                   control={control}
                   type="text"
@@ -99,6 +109,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* organisation name input field */}
                 <Inputcomponent
                   control={control}
                   type="text"
@@ -112,6 +123,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* dropdown component to choose starting year */}
                 <Dropdowncomponent
                   options={startYears}
                   control={control}
@@ -121,6 +133,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* dropdown input for choosing ending year */}
                 <Dropdowncomponent
                   options={endYears}
                   control={control}
@@ -132,6 +145,7 @@ const Workexperience = ({ onNext, onBack }) => {
               <hr />
             </React.Fragment>
           ))}
+          {/* add/remove button for input fields */}
           <Grid item xs={12} sm={12} ms={12} lg={12}>
             {moreExperience === 1 && (
               <div className="add-remove-btn">
@@ -168,6 +182,7 @@ const Workexperience = ({ onNext, onBack }) => {
           </Grid>
 
           <hr />
+          {/* back/reset/next button */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="back-next-btn">
               <Button
@@ -204,6 +219,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 Reset
               </Button>
 
+              {/* button that turns green after submitting form successfully */}
               {isSubmit ? (
                 <Button
                   variant="contained"

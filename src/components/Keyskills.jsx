@@ -4,20 +4,24 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addSkillInfo } from "../redux/skillsSlice";
-import { Paper, Grid, Button } from "@mui/material";
+import { Paper, Grid, Button, Snackbar, Alert } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import "../styles/Keyskills.css";
 
 const Keyskills = ({ onBack }) => {
   const [numInputs, setNumInputs] = useState(4);
+  const [showSnackbar, setShowSnackbar] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // main element for checking of all forms validation
+  const allValidated = sessionStorage.getItem("allValidated");
   const addSkill = () => {
     if (numInputs < 8) {
       setNumInputs(numInputs + 1);
     }
   };
 
+  // remove function to remove input fields and its data
   const removeSkill = () => {
     if (numInputs > 4) {
       setNumInputs(numInputs - 1);
@@ -25,6 +29,11 @@ const Keyskills = ({ onBack }) => {
     }
   };
 
+  const closeSnackbar = () => {
+    setShowSnackbar(false);
+  };
+
+  // useForm hook
   const {
     control,
     handleSubmit,
@@ -34,22 +43,35 @@ const Keyskills = ({ onBack }) => {
 
   const [isSubmit, setIsSubmit] = useState(false);
 
+  // function for submitting data
   const onSubmit = (data) => {
     sessionStorage.setItem("skills", JSON.stringify(data));
     dispatch(addSkillInfo(data));
     setIsSubmit(true);
     console.log(data);
     setTimeout(() => {
-      navigate("/preview");
-    }, 1200);
+      // checks if all forms are validated, then proceeds
+      // also i have added timeout functionality in all submitting button to make user feel data is being processed through that slight delay
+      if (allValidated) {
+        setTimeout(() => {
+          navigate("/preview");
+        }, 600);
+      } else {
+        // if previous forms arent validated then show snackbar
+        setShowSnackbar(true);
+        setIsSubmit(false);
+      }
+    }, 600);
   };
 
+  // reset button function
   const reset = () => {
     sessionStorage.removeItem("skills");
     window.location.reload();
   };
 
   useEffect(() => {
+    // to set the number of extra input fields to be rendered based upon values in them
     const skills = JSON.parse(sessionStorage.getItem("skills"));
     if (skills) {
       let numInputs = 4;
@@ -60,6 +82,7 @@ const Keyskills = ({ onBack }) => {
           break;
         }
       }
+      // to persist data in input fields even after reloads
       setNumInputs(numInputs);
       Object.keys(skills).forEach((key) => {
         setValue(key, skills[key]);
@@ -74,6 +97,7 @@ const Keyskills = ({ onBack }) => {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="header">Key Skills</div>
           </Grid>
+          {/* single map function renders every field based on state value of numInputs */}
           {[...Array(numInputs)].map((_, i) => (
             <Grid item key={i + 1} xs={12} sm={12} md={6} lg={6}>
               <Inputcomponent
@@ -90,6 +114,7 @@ const Keyskills = ({ onBack }) => {
             </Grid>
           ))}
           <hr />
+          {/* add/remove button for input fields */}
           <Grid className="add-remove" item xs={12} sm={12} md={12} lg={12}>
             {numInputs < 8 && (
               <Button
@@ -119,6 +144,7 @@ const Keyskills = ({ onBack }) => {
             )}
           </Grid>
           <hr />
+          {/* back/reset/next buttons */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="back-next-btn">
               <Button
@@ -155,7 +181,7 @@ const Keyskills = ({ onBack }) => {
               >
                 Reset
               </Button>
-
+              {/* button that conditionally changes to green upon submitting form */}
               {isSubmit ? (
                 <Button
                   variant="contained"
@@ -197,6 +223,21 @@ const Keyskills = ({ onBack }) => {
             </div>
           </Grid>
         </Grid>
+        {/* snackbar that is displayed when previous forms arent validated and user tries to proceed to previewing the resume */}
+        <Snackbar
+          open={showSnackbar}
+          autoHideDuration={5000}
+          onClose={closeSnackbar}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert
+            onClose={closeSnackbar}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Submit data in all forms before continuing!
+          </Alert>
+        </Snackbar>
       </Paper>
     </>
   );

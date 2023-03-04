@@ -8,8 +8,10 @@ import { Paper, Grid, Button } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import "../styles/Education.css";
 
-const Education = ({ onNext, onBack }) => {
+const Education = ({ onNext, onBack, validated }) => {
   const dispatch = useDispatch();
+
+  //items for displaying in dropdown input component
   const startYears = [];
   for (let year = 2010; year <= 2023; year++) {
     startYears.push({ value: year.toString(), label: year.toString() });
@@ -33,7 +35,7 @@ const Education = ({ onNext, onBack }) => {
   const addEducation = () => {
     setMoreEducation(2);
   };
-
+  // function to execute when you remove additional fields
   const removeEducation = () => {
     setMoreEducation(1);
     setValue("type2", "");
@@ -44,6 +46,7 @@ const Education = ({ onNext, onBack }) => {
     setValue("endyear2", "");
   };
 
+  // useForm hook
   const {
     control,
     handleSubmit,
@@ -53,21 +56,25 @@ const Education = ({ onNext, onBack }) => {
 
   const [isSubmit, setIsSubmit] = useState(false);
 
+  //function when data is submitted
   const onSubmit = (data) => {
     sessionStorage.setItem("education", JSON.stringify(data));
     dispatch(addEducationInfo(data));
     setIsSubmit(true);
+    validated();
     console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);
   };
 
+  //when you click reset
   const reset = () => {
     sessionStorage.removeItem("education");
     window.location.reload();
   };
 
+  //to persist values in input fields even during reloads
   useEffect(() => {
     const education = JSON.parse(sessionStorage.getItem("education"));
     if (education) {
@@ -95,6 +102,7 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* types of education/course input field */}
                 <Dropdowncomponent
                   control={control}
                   options={types}
@@ -104,6 +112,7 @@ const Education = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* input field for university/institute input field */}
                 <Inputcomponent
                   control={control}
                   type="text"
@@ -121,6 +130,7 @@ const Education = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* input field for degree/course */}
                 <Inputcomponent
                   control={control}
                   type="text"
@@ -134,6 +144,7 @@ const Education = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* input field for entering percentage/grade */}
                 <Inputcomponent
                   control={control}
                   type="number"
@@ -152,6 +163,7 @@ const Education = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* dropdown input for choosing starting year */}
                 <Dropdowncomponent
                   control={control}
                   options={startYears}
@@ -161,6 +173,7 @@ const Education = ({ onNext, onBack }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
+                {/* dropdown input for choosing ending year */}
                 <Dropdowncomponent
                   control={control}
                   options={endYears}
@@ -172,6 +185,7 @@ const Education = ({ onNext, onBack }) => {
               <hr />
             </React.Fragment>
           ))}
+          {/* add/remove input fields buttons are here and are displayed conditionally */}
           <Grid item xs={12} sm={12} ms={12} lg={12}>
             {moreEducation === 1 && (
               <div className="add-remove-btn">
@@ -208,6 +222,7 @@ const Education = ({ onNext, onBack }) => {
           </Grid>
 
           <hr />
+          {/* back/reset/next buttons */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="back-next-btn">
               <Button
@@ -243,7 +258,7 @@ const Education = ({ onNext, onBack }) => {
               >
                 Reset
               </Button>
-
+              {/* button that changes to green when submitting form */}
               {isSubmit ? (
                 <Button
                   variant="contained"

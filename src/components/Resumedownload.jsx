@@ -9,36 +9,42 @@ import "../styles/Resumedownload.css";
 
 const Resumedownload = () => {
   const templateId = useSelector((state) => state.template.templateId);
+  // retrieving templateid from sessionstorage
   const templateIdStorage = sessionStorage.getItem("templateId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
+  // download button function
   const download = () => {
     var doc = new jsPDF({
       orientation: "portrait",
       unit: "pt",
       format: "a4",
     });
+    // getting template id from redux or sessionstorage
     var source = document.querySelector(templateId || templateIdStorage);
     doc.html(source, {
       callback: function (pdf) {
         var pageCount = doc.internal.getNumberOfPages();
         pdf.deletePage(pageCount);
         let regex = /^[a-zA-Z\d\s]+$/;
+        // checks input for entering filename
         if (!regex.test(fileName)) {
           setSnackbarOpen(true);
           return;
         }
         pdf.save(`${fileName}.pdf`);
+        // converts pdf file for saving to sessionstorage
         const pdfData = pdf.output("datauristring");
 
+        // functionality of displaying success message after successfully downloading resume and redirecting to homepage after clearing sessionstorage
         setTimeout(() => {
           var messageBox = document.querySelector(".alert-box");
           messageBox.style.visibility = "visible";
           setTimeout(() => {
-            // clear session storage and set created resume in it
+            // clear session storage and setting the converted pdf file in it
             sessionStorage.clear();
             sessionStorage.setItem("resume", pdfData);
             // Redirect to homepage
@@ -53,21 +59,25 @@ const Resumedownload = () => {
     setSnackbarOpen(false);
   };
 
+  // back button functionality to go back to details filling form from preview
   const handleBack = () => {
     navigate("/details");
     dispatch(setActiveTab(4));
   };
   return (
     <>
+      {/* input for entering filename */}
       <Typography className="save-label">Enter File Name</Typography>
       <TextField
         fullWidth
         size="small"
         type="text"
+        // sets filename to whatever user enters
         onChange={(event) => {
           setFileName(event.target.value);
         }}
       />
+      {/* back and save button */}
       <div className="back-save">
         <Button
           onClick={handleBack}
@@ -102,6 +112,7 @@ const Resumedownload = () => {
           Save
         </Button>
       </div>
+      {/* success message dialog box */}
       <div className="alert-box">
         <div className="alert-content">
           <CheckCircleOutlineTwoToneIcon
@@ -118,6 +129,7 @@ const Resumedownload = () => {
           </div>
         </div>
       </div>
+      {/* snackbar that pops up if entered filename isnt valid */}
       <Snackbar
         open={snackbarOpen}
         onClose={handleCloseSnackbar}

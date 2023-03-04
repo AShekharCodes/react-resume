@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// initial work experience data
 const experienceInfo = {
   jobtitle1: "",
   organisation1: "",
@@ -11,6 +12,7 @@ const experienceInfo = {
   endyear2: "",
 };
 
+// work experience reducer and actions
 const workExperienceSlice = createSlice({
   name: "experienceInfo",
   initialState: { value: experienceInfo },
@@ -24,6 +26,7 @@ const workExperienceSlice = createSlice({
   },
 });
 
+// exporting reducer and actions
 export const { addExperienceInfo, resetExperienceInfo } =
   workExperienceSlice.actions;
 export default workExperienceSlice.reducer;

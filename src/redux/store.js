@@ -6,6 +6,7 @@ import educationReducer from "./educationSlice";
 import skillsReducer from "./skillsSlice";
 import templateReducer from "./templateSlice";
 
+// creating store and passing every reducer created
 const store = configureStore({
   reducer: {
     tabs: tabsReducer,

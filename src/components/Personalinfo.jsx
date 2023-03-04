@@ -13,10 +13,11 @@ import Inputcomponent from "./Inputcomponent";
 import Imageupload from "./Imageupload";
 import "../styles/Personalinfo.css";
 
-const Personalinfo = ({ onNext }) => {
+const Personalinfo = ({ onNext, validated }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // function only for the back button on personalinfo page
   const goBack = () => {
     navigate("/");
     sessionStorage.clear();
@@ -24,6 +25,7 @@ const Personalinfo = ({ onNext }) => {
     dispatch(removeImg());
   };
 
+  // useForm hook
   const {
     control,
     handleSubmit,
@@ -33,22 +35,27 @@ const Personalinfo = ({ onNext }) => {
 
   const [isSubmit, setIsSubmit] = useState(false);
 
+  // function for submitting form
   const onSubmit = (data) => {
     sessionStorage.setItem("personalInfo", JSON.stringify(data));
     dispatch(addPersonalInfo(data));
     setIsSubmit(true);
+    // sets validation for personalnfo form to true and saves it in sessionstorage
+    validated();
     console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);
   };
 
+  // function for reset button
   const reset = () => {
     sessionStorage.removeItem("personalInfo");
     sessionStorage.removeItem("profileimage");
     window.location.reload();
   };
 
+  // to persist values in fields even during reloads
   useEffect(() => {
     const personalInfo = JSON.parse(sessionStorage.getItem("personalInfo"));
     if (personalInfo) {
@@ -71,17 +78,20 @@ const Personalinfo = ({ onNext }) => {
             <div className="header">Personal Details</div>
           </Grid>
           <hr />
+          {/* the image upload component */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="image-component">
               <Imageupload />
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for first name */}
             <Inputcomponent
               control={control}
               type="text"
               label="First name"
               name="firstname"
+              // validation rules set like this in every field as per field
               rules={{
                 required: "First name is required!",
                 maxLength: { value: 20, message: "Max 20 characters!" },
@@ -93,6 +103,7 @@ const Personalinfo = ({ onNext }) => {
               error={errors.firstname}
             />
           </Grid>
+          {/* input field for lastname */}
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
               control={control}
@@ -111,6 +122,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for email */}
             <Inputcomponent
               control={control}
               type="email"
@@ -128,6 +140,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for mobile number */}
             <Inputcomponent
               control={control}
               type="number"
@@ -144,6 +157,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
+            {/* input field for address */}
             <Inputcomponent
               control={control}
               type="text"
@@ -157,6 +171,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for city */}
             <Inputcomponent
               control={control}
               type="text"
@@ -174,6 +189,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for state */}
             <Inputcomponent
               control={control}
               type="text"
@@ -191,6 +207,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
+            {/* input field for pincode */}
             <Inputcomponent
               control={control}
               type="number"
@@ -207,6 +224,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
+            {/* input field for entering objective */}
             <Inputcomponent
               control={control}
               type="text"
@@ -223,6 +241,7 @@ const Personalinfo = ({ onNext }) => {
             />
           </Grid>
           <hr />
+          {/* back/reset/next button */}
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="back-next-btn">
               <Button
@@ -258,7 +277,7 @@ const Personalinfo = ({ onNext }) => {
               >
                 Reset
               </Button>
-
+              {/* button that turns green when submitting */}
               {isSubmit ? (
                 <Button
                   variant="contained"

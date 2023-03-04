@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// initial value for personal info
 const personalInfo = {
   profileimage: "",
   firstname: "",
@@ -13,6 +14,7 @@ const personalInfo = {
   objective: "",
 };
 
+// reducer and actions
 const personalInfoSlice = createSlice({
   name: "personalInfo",
   initialState: { value: personalInfo },
@@ -32,6 +34,7 @@ const personalInfoSlice = createSlice({
   },
 });
 
+// exporting reducers and actions
 export const { addPersonalInfo, resetPersonalInfo, addImg, removeImg } =
   personalInfoSlice.actions;
 export default personalInfoSlice.reducer;

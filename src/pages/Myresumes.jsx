@@ -6,11 +6,13 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "../styles/Myresume.css";
 
 const Myresumes = () => {
+  // retrieving resume pdf file from sessionstorage
   const pdf = sessionStorage.getItem("resume");
   return (
     <>
       <Navbar />
       <div className="wrapper">
+        {/* displaying conditionally if pdf file is present */}
         {pdf ? (
           <div className="my-resume">
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">

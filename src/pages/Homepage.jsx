@@ -15,13 +15,14 @@ const Homepage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // use template button functionality, it is passing the related template id to sessionstorage and redux store
   const fillDetails = (templateId) => {
     sessionStorage.clear();
     dispatch(setTemplateId(templateId));
     sessionStorage.setItem("templateId", templateId);
     console.log(templateId);
     navigate("/details");
-    window.location.reload();
+    window.location.reload(); //refreshing before displaying form to clear out tab's state
   };
 
   return (
@@ -33,6 +34,7 @@ const Homepage = () => {
           align="center"
           fontFamily="Poppins, sans-serif"
         >
+          {/* main header */}
           Templates
         </Typography>
         <Typography
@@ -47,6 +49,7 @@ const Homepage = () => {
           Select a Template to get Started
         </Typography>
       </Box>
+      {/* template grid that contains the template images and buttons which are styled using css to render upon templates */}
       <Grid className="template-grid" container spacing={0}>
         <Grid className="grid-item" item xs={12} sm={6} md={4} lg={3}>
           <div className="template-btn-container">

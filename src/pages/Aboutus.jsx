@@ -14,6 +14,7 @@ import about from "../images/about.jpg";
 import "../styles/About.css";
 
 const Aboutus = () => {
+  // values to be added in url string
   const phoneNumber = "9654991140";
   const username = "SpamTheScam";
   const message = "Hi, I saw your resume and I am interested in your work!";
@@ -34,10 +35,12 @@ const Aboutus = () => {
               padding: "0px 20px 20px 20px",
             }}
           >
+            {/* main header */}
             Resume <br /> Builder
           </Typography>
         </Grid>
         <Grid item xs={12} sm={12} md={7} lg={7}>
+          {/* description */}
           <Typography
             sx={{ fontFamily: "Poppins, sans-serif", padding: "20px" }}
           >
@@ -71,6 +74,7 @@ const Aboutus = () => {
           <Typography sx={{ fontFamily: "Poppins , sans-serif" }}>
             This project was made using:
           </Typography>
+          {/* icons displaying what technologies were used in development of this application */}
           <div className="icons">
             <Tooltip title="React Js">
               <a href="https://www.reactjs.org">
@@ -93,6 +97,7 @@ const Aboutus = () => {
           <Typography sx={{ fontFamily: "Poppins , sans-serif" }}>
             Connect with me:
           </Typography>
+          {/* icons to connect with me :) */}
           <div className="icons">
             <Tooltip title="Whatsapp">
               <a href={link}>

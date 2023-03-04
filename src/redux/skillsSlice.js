@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// initial data for skills
 const skillsInfo = {
   skill1: "",
   skill2: "",
@@ -11,6 +12,7 @@ const skillsInfo = {
   skill8: "",
 };
 
+// reducer and actions
 const skillsSlice = createSlice({
   name: "skillsInfo",
   initialState: { value: skillsInfo },
@@ -24,5 +26,6 @@ const skillsSlice = createSlice({
   },
 });
 
+// exporting reducer and actions
 export const { addSkillInfo, resetSkillInfo } = skillsSlice.actions;
 export default skillsSlice.reducer;

@@ -20,6 +20,7 @@ const Template4 = () => {
   return (
     <div id="Template4">
       <div className="content-4">
+        {/* personal info section */}
         <div className="personal-section">
           <div className="personal-data-4">
             {imageStorage && (
@@ -54,6 +55,7 @@ const Template4 = () => {
             {personal.objective || personalStorage.objective}
           </div>
         </div>
+        {/* experience section */}
         <div className="experience-section">
           <div className="line-4"></div>
           <div className="text">Experience</div>
@@ -71,6 +73,7 @@ const Template4 = () => {
                 {experience.endyear1 || experienceStorage.endyear1}
               </p>
             </div>
+            {/* conditionally rendering second datas in form */}
             {experienceStorage.jobtitle2 ? (
               <div className="experience-content">
                 <p className="jobtitle">
@@ -89,6 +92,7 @@ const Template4 = () => {
             )}
           </div>
         </div>
+        {/* education section */}
         <div className="education-section">
           <div className="line-4"></div>
           <div className="text">Education</div>
@@ -112,6 +116,7 @@ const Template4 = () => {
                 {education.endyear1 || educationStorage.endyear1}
               </p>
             </div>
+            {/* conditionally rendering second datas in form */}
             {educationStorage.type2 ? (
               <div className="education-content">
                 <p className="type">
@@ -136,6 +141,7 @@ const Template4 = () => {
             )}
           </div>
         </div>
+        {/* skills section */}
         <div className="skills-section">
           <div className="line-4"></div>
           <div className="text">Skills</div>

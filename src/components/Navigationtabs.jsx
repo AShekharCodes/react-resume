@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/Navigationtabs.css";
 
 const Navigationtabs = ({ activeTab, onTabChange }) => {
+  // style when tab is selected
   const style = {
     borderLeft: "3px solid rgb(44, 109, 230)",
     color: "rgb(44, 109, 230)",

@@ -10,6 +10,7 @@ import { Grid, Typography } from "@mui/material";
 import "../styles/Preview.css";
 
 const Preview = () => {
+  // retrieving template id from sessionstorage and redux store
   const templateId = useSelector((state) => state.template.templateId);
   const templateIdStorage = sessionStorage.getItem("templateId");
   return (
@@ -31,11 +32,13 @@ const Preview = () => {
               padding: "0px 10px",
             }}
           >
+            {/* header */}
             Resume Preview
           </Typography>
         </Grid>
         <Grid item className="preview-component" xs={12} sm={12} md={9} lg={9}>
           <div className="preview-div">
+            {/* conditionally displaying template based on template id */}
             {(templateId || templateIdStorage) === "#Template1" && (
               <Template1 />
             )}
@@ -50,6 +53,7 @@ const Preview = () => {
             )}
           </div>
         </Grid>
+        {/* save resume component containing input field to enter file name */}
         <Grid item className="save-component" xs={12} sm={12} md={3} lg={3}>
           <div className="save-div">
             <Resumedownload />

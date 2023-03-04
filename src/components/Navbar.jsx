@@ -17,12 +17,11 @@ const Navbar = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  // function for those clickable elements that takes us to homepage
   const reset = () => {
-    sessionStorage.clear();
     window.location.replace("/");
   };
-
+  // the drawer that pops up from left in small screen devices
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <NavLink to="/">
@@ -52,6 +51,7 @@ const Navbar = () => {
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
+        // navbar blur effect
         color="transparent"
         sx={{ backdropFilter: "blur(12px)" }}
       >
@@ -66,7 +66,7 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-
+            {/* navbar logo */}
             <NavLink to="/">
               <img
                 src={logo}
@@ -82,6 +82,7 @@ const Navbar = () => {
               display: { xs: "none", sm: "block" },
             }}
           >
+            {/* navbar links */}
             <div className="navbar-btns">
               <NavLink to="/" onClick={reset} className="btn">
                 Resume Templates
@@ -110,6 +111,7 @@ const Navbar = () => {
               boxSizing: "border-box",
               width: "200px",
             },
+            // blur in drawer's background
             backdropFilter: "blur(8px)",
           }}
         >
