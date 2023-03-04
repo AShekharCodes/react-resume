@@ -21,6 +21,7 @@ const Keyskills = ({ onBack }) => {
   const removeSkill = () => {
     if (numInputs > 4) {
       setNumInputs(numInputs - 1);
+      setValue(`skill${numInputs}`, "");
     }
   };
 
@@ -29,33 +30,42 @@ const Keyskills = ({ onBack }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const onSubmit = (data) => {
-    localStorage.setItem("skills", JSON.stringify(data));
+    sessionStorage.setItem("skills", JSON.stringify(data));
     dispatch(addSkillInfo(data));
-    setIsSubmitted(true);
+    setIsSubmit(true);
     console.log(data);
     setTimeout(() => {
       navigate("/preview");
-    }, 1500);
+    }, 1200);
   };
 
   const reset = () => {
-    localStorage.removeItem("skills");
+    sessionStorage.removeItem("skills");
     window.location.reload();
   };
 
   useEffect(() => {
-    const personalInfo = JSON.parse(localStorage.getItem("skills"));
-    if (personalInfo) {
-      Object.keys(personalInfo).forEach((key) => {
-        setValue(key, personalInfo[key]);
+    const skills = JSON.parse(sessionStorage.getItem("skills"));
+    if (skills) {
+      let numInputs = 4;
+      for (let i = 4; i <= 8; i++) {
+        if (skills[`skill${i}`]) {
+          numInputs = i;
+        } else {
+          break;
+        }
+      }
+      setNumInputs(numInputs);
+      Object.keys(skills).forEach((key) => {
+        setValue(key, skills[key]);
       });
     }
-  }, [setValue]);
+  }, [setValue, setNumInputs]);
 
   return (
     <>
@@ -67,7 +77,6 @@ const Keyskills = ({ onBack }) => {
           {[...Array(numInputs)].map((_, i) => (
             <Grid item key={i + 1} xs={12} sm={12} md={6} lg={6}>
               <Inputcomponent
-                submitted={isSubmitted}
                 control={control}
                 type="text"
                 name={`skill${i + 1}`}
@@ -147,7 +156,7 @@ const Keyskills = ({ onBack }) => {
                 Reset
               </Button>
 
-              {isSubmitted ? (
+              {isSubmit ? (
                 <Button
                   variant="contained"
                   sx={{

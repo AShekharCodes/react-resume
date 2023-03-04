@@ -9,7 +9,7 @@ import "../styles/Resumedownload.css";
 
 const Resumedownload = () => {
   const templateId = useSelector((state) => state.template.templateId);
-  const templateIdStorage = localStorage.getItem("templateId");
+  const templateIdStorage = sessionStorage.getItem("templateId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState("");
@@ -32,13 +32,15 @@ const Resumedownload = () => {
           return;
         }
         pdf.save(`${fileName}.pdf`);
+        const pdfData = pdf.output("datauristring");
 
         setTimeout(() => {
           var messageBox = document.querySelector(".alert-box");
           messageBox.style.visibility = "visible";
           setTimeout(() => {
-            // clear local storage
-            localStorage.clear();
+            // clear session storage and set created resume in it
+            sessionStorage.clear();
+            sessionStorage.setItem("resume", pdfData);
             // Redirect to homepage
             window.location.replace("/");
           }, 1500);

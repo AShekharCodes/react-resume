@@ -19,7 +19,7 @@ const Personalinfo = ({ onNext }) => {
 
   const goBack = () => {
     navigate("/");
-    localStorage.clear();
+    sessionStorage.clear();
     dispatch(resetPersonalInfo());
     dispatch(removeImg());
   };
@@ -29,28 +29,28 @@ const Personalinfo = ({ onNext }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const onSubmit = (data) => {
-    localStorage.setItem("personalInfo", JSON.stringify(data));
+    sessionStorage.setItem("personalInfo", JSON.stringify(data));
     dispatch(addPersonalInfo(data));
-    setIsSubmitted(true);
+    setIsSubmit(true);
     console.log(data);
     setTimeout(() => {
       onNext();
-    }, 1500);
+    }, 1200);
   };
 
   const reset = () => {
-    localStorage.removeItem("personalInfo");
-    localStorage.removeItem("profileimage");
+    sessionStorage.removeItem("personalInfo");
+    sessionStorage.removeItem("profileimage");
     window.location.reload();
   };
 
   useEffect(() => {
-    const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
+    const personalInfo = JSON.parse(sessionStorage.getItem("personalInfo"));
     if (personalInfo) {
       Object.keys(personalInfo).forEach((key) => {
         setValue(key, personalInfo[key]);
@@ -78,7 +78,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               label="First name"
@@ -96,7 +95,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               label="Last name"
@@ -114,7 +112,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="email"
               label="Email"
@@ -132,7 +129,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="number"
               isKeyDown={true}
@@ -149,7 +145,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               label="Address"
@@ -163,7 +158,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               label="City"
@@ -181,7 +175,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               label="State"
@@ -199,7 +192,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="number"
               isKeyDown={true}
@@ -216,7 +208,6 @@ const Personalinfo = ({ onNext }) => {
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Inputcomponent
-              submitted={isSubmitted}
               control={control}
               type="text"
               isMultiline={true}
@@ -268,7 +259,7 @@ const Personalinfo = ({ onNext }) => {
                 Reset
               </Button>
 
-              {isSubmitted ? (
+              {isSubmit ? (
                 <Button
                   variant="contained"
                   sx={{

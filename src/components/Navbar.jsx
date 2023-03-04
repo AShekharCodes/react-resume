@@ -8,8 +8,8 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import logo from "../../images/almabetter_logo.png";
-import "../../styles/Navbar.css";
+import logo from "../images/almabetter_logo.png";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,19 +18,24 @@ const Navbar = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const clear = () => {
-    localStorage.clear();
+  const reset = () => {
+    sessionStorage.clear();
     window.location.replace("/");
   };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <NavLink to="/">
-        <img src={logo} className="drawerlogo" alt="AlmaBetter-logo" />
+        <img
+          src={logo}
+          onClick={reset}
+          className="drawerlogo"
+          alt="AlmaBetter-logo"
+        />
       </NavLink>
       <Divider />
       <div className="list-container">
-        <NavLink to="/" onClick={clear} className="list-btn">
+        <NavLink to="/" onClick={reset} className="list-btn">
           Resume Templates
         </NavLink>
         <NavLink to="/my_resumes" className="list-btn">
@@ -65,7 +70,7 @@ const Navbar = () => {
             <NavLink to="/">
               <img
                 src={logo}
-                onClick={clear}
+                onClick={reset}
                 className="mainlogo"
                 alt="AlmaBetter-logo"
               />
@@ -78,7 +83,7 @@ const Navbar = () => {
             }}
           >
             <div className="navbar-btns">
-              <NavLink to="/" onClick={clear} className="btn">
+              <NavLink to="/" onClick={reset} className="btn">
                 Resume Templates
               </NavLink>
               <NavLink to="/my_resumes" className="btn">

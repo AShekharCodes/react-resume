@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, MenuItem } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const Dropdowncomponent = ({
-  options,
-  name,
-  label,
-  rules,
-  submitted,
-  control,
-}) => {
+const Dropdowncomponent = ({ options, name, label, rules, control }) => {
   //to adjust input field height according to screen width
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -47,7 +40,7 @@ const Dropdowncomponent = ({
           <label
             className={`label ${isFocused ? "focused" : ""} ${
               error ? "error" : ""
-            } ${submitted && value ? "success" : ""}`}
+            } ${!error && value ? "success" : ""}`}
           >
             {label}
           </label>

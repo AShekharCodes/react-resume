@@ -11,10 +11,16 @@ import "../styles/Workexperience.css";
 const Workexperience = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
 
-  const years = [];
+  const startYears = [];
   for (let year = 2010; year <= 2023; year++) {
-    years.push({ value: year.toString(), label: year.toString() });
+    startYears.push({ value: year.toString(), label: year.toString() });
   }
+  const endYears = [];
+  for (let year = 2010; year <= 2023; year++) {
+    endYears.push({ value: year.toString(), label: year.toString() });
+  }
+  endYears.push({ value: "Not yet", label: "Not yet" });
+
   const [moreExperience, setMoreExperience] = useState(1);
 
   const addExperience = () => {
@@ -23,6 +29,10 @@ const Workexperience = ({ onNext, onBack }) => {
 
   const removeExperience = () => {
     setMoreExperience(1);
+    setValue("jobtitle2", "");
+    setValue("organisation2", "");
+    setValue("startyear2", "");
+    setValue("endyear2", "");
   };
 
   const {
@@ -30,33 +40,36 @@ const Workexperience = ({ onNext, onBack }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const onSubmit = (data) => {
-    localStorage.setItem("workExperience", JSON.stringify(data));
+    sessionStorage.setItem("workExperience", JSON.stringify(data));
     dispatch(addExperienceInfo(data));
-    setIsSubmitted(true);
+    setIsSubmit(true);
     console.log(data);
     setTimeout(() => {
       onNext();
-    }, 1500);
+    }, 1200);
   };
 
   const reset = () => {
-    localStorage.removeItem("workExperience");
+    sessionStorage.removeItem("workExperience");
     window.location.reload();
   };
 
   useEffect(() => {
-    const personalInfo = JSON.parse(localStorage.getItem("workExperience"));
-    if (personalInfo) {
-      Object.keys(personalInfo).forEach((key) => {
-        setValue(key, personalInfo[key]);
+    const experience = JSON.parse(sessionStorage.getItem("workExperience"));
+    if (experience) {
+      Object.keys(experience).forEach((key) => {
+        setValue(key, experience[key]);
       });
+      if (experience["jobtitle2"]) {
+        setMoreExperience(2);
+      }
     }
-  }, [setValue]);
+  }, [setValue, setMoreExperience]);
 
   return (
     <>
@@ -74,7 +87,6 @@ const Workexperience = ({ onNext, onBack }) => {
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
-                  submitted={isSubmitted}
                   control={control}
                   type="text"
                   name={`jobtitle${i + 1}`}
@@ -88,7 +100,6 @@ const Workexperience = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
-                  submitted={isSubmitted}
                   control={control}
                   type="text"
                   name={`organisation${i + 1}`}
@@ -102,8 +113,7 @@ const Workexperience = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
-                  options={years}
-                  submitted={isSubmitted}
+                  options={startYears}
                   control={control}
                   label="Start Year"
                   name={`startyear${i + 1}`}
@@ -112,8 +122,7 @@ const Workexperience = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
-                  options={years}
-                  submitted={isSubmitted}
+                  options={endYears}
                   control={control}
                   label="End Year"
                   name={`endyear${i + 1}`}
@@ -195,7 +204,7 @@ const Workexperience = ({ onNext, onBack }) => {
                 Reset
               </Button>
 
-              {isSubmitted ? (
+              {isSubmit ? (
                 <Button
                   variant="contained"
                   sx={{

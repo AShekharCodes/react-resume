@@ -13,7 +13,6 @@ const Inputcomponent = ({
   isMultiline,
   rows,
   rules,
-  submitted,
 }) => {
   //to adjust input field height according to screen width
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -59,7 +58,7 @@ const Inputcomponent = ({
           <label
             className={`label ${isFocused ? "focused" : ""} ${
               error ? "error" : ""
-            } ${submitted && value ? "success" : ""}`}
+            } ${!error && value ? "success" : ""}`}
           >
             {label}
           </label>

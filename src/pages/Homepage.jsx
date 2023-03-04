@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 import { setTemplateId } from "../redux/templateSlice";
@@ -16,10 +16,12 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   const fillDetails = (templateId) => {
+    sessionStorage.clear();
     dispatch(setTemplateId(templateId));
-    localStorage.setItem("templateId", templateId);
+    sessionStorage.setItem("templateId", templateId);
     console.log(templateId);
     navigate("/details");
+    window.location.reload();
   };
 
   return (

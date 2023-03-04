@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/Navbar";
 import Template1 from "../templates/Template1";
 import Template2 from "../templates/Template2";
 import Template3 from "../templates/Template3";
@@ -11,7 +11,7 @@ import "../styles/Preview.css";
 
 const Preview = () => {
   const templateId = useSelector((state) => state.template.templateId);
-  const templateIdStorage = localStorage.getItem("templateId");
+  const templateIdStorage = sessionStorage.getItem("templateId");
   return (
     <>
       <Navbar />

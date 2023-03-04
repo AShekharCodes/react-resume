@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/Navbar";
 import { Grid, Typography, Tooltip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";

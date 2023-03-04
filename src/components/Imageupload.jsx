@@ -8,7 +8,7 @@ import "../styles/Imageupload.css";
 const Imageupload = () => {
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
-  const imageStorage = localStorage.getItem("profileimage");
+  const imageStorage = sessionStorage.getItem("profileimage");
   const personal = useSelector((state) => state.personalInfo.value);
   const uploadImage = () => {
     fileInputRef.current.click();
@@ -21,14 +21,14 @@ const Imageupload = () => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         dispatch(addImg(reader.result));
-        localStorage.setItem("profileimage", reader.result);
+        sessionStorage.setItem("profileimage", reader.result);
         fileInputRef.current.value = null;
       };
     }
   };
 
   const removeImage = () => {
-    localStorage.removeItem("profileimage");
+    sessionStorage.removeItem("profileimage");
     dispatch(removeImg());
   };
 

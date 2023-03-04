@@ -1,0 +1,28 @@
+.my-resume {
+  padding: 20px;
+}
+
+.footer {
+  padding: 10px;
+  margin: 10px;
+  margin-top: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.no-resume {
+  padding: 20px;
+  margin: 20px 10px 50px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 28px;
+  font-family: "Poppins";
+  text-align: center;
+  font-weight: bold;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}

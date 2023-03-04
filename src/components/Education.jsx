@@ -10,13 +10,22 @@ import "../styles/Education.css";
 
 const Education = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
-  const years = [];
+  const startYears = [];
   for (let year = 2010; year <= 2023; year++) {
-    years.push({ value: year.toString(), label: year.toString() });
+    startYears.push({ value: year.toString(), label: year.toString() });
   }
+  const endYears = [];
+  for (let year = 2010; year <= 2023; year++) {
+    endYears.push({ value: year.toString(), label: year.toString() });
+  }
+  endYears.push({ value: "Not yet", label: "Not yet" });
+
   const types = [
     { value: "Under Graduation", label: "Under Graduation" },
     { value: "Post Graduation", label: "Post Graduation" },
+    { value: "Doctorate", label: "Doctorate" },
+    { value: "Certificate", label: "Certificate" },
+    { value: "Diploma", label: "Diploma" },
   ];
 
   const [moreEducation, setMoreEducation] = useState(1);
@@ -27,6 +36,12 @@ const Education = ({ onNext, onBack }) => {
 
   const removeEducation = () => {
     setMoreEducation(1);
+    setValue("type2", "");
+    setValue("university2", "");
+    setValue("degree2", "");
+    setValue("score2", "");
+    setValue("startyear2", "");
+    setValue("endyear2", "");
   };
 
   const {
@@ -34,33 +49,36 @@ const Education = ({ onNext, onBack }) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const onSubmit = (data) => {
-    localStorage.setItem("education", JSON.stringify(data));
+    sessionStorage.setItem("education", JSON.stringify(data));
     dispatch(addEducationInfo(data));
-    setIsSubmitted(true);
+    setIsSubmit(true);
     console.log(data);
     setTimeout(() => {
       onNext();
-    }, 1500);
+    }, 1200);
   };
 
   const reset = () => {
-    localStorage.removeItem("education");
+    sessionStorage.removeItem("education");
     window.location.reload();
   };
 
   useEffect(() => {
-    const personalInfo = JSON.parse(localStorage.getItem("education"));
-    if (personalInfo) {
-      Object.keys(personalInfo).forEach((key) => {
-        setValue(key, personalInfo[key]);
+    const education = JSON.parse(sessionStorage.getItem("education"));
+    if (education) {
+      Object.keys(education).forEach((key) => {
+        setValue(key, education[key]);
       });
+      if (education["type2"]) {
+        setMoreEducation(2);
+      }
     }
-  }, [setValue]);
+  }, [setValue, setMoreEducation]);
 
   return (
     <>
@@ -78,7 +96,6 @@ const Education = ({ onNext, onBack }) => {
               <hr className="top-line" />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
-                  submitted={isSubmitted}
                   control={control}
                   options={types}
                   label="Type"
@@ -88,17 +105,16 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
-                  submitted={isSubmitted}
                   control={control}
                   type="text"
                   name={`university${i + 1}`}
-                  label="University"
+                  label="University/Institute"
                   error={errors[`university${i + 1}`]}
                   rules={{
-                    required: "University is required!",
+                    required: "University/Institute is required!",
                     pattern: {
                       value: /^[a-zA-Z\s]+$/,
-                      message: "Invalid university name!",
+                      message: "Invalid university/institute name!",
                     },
                     maxLength: { value: 30, message: "Max 30 characters!" },
                   }}
@@ -106,25 +122,19 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
-                  submitted={isSubmitted}
                   control={control}
                   type="text"
                   name={`degree${i + 1}`}
-                  label="Degree"
+                  label="Degree/Course"
                   error={errors[`degree${i + 1}`]}
                   rules={{
-                    required: "Degree is required!",
-                    maxLength: { value: 15, message: "Max 15 characters!" },
-                    pattern: {
-                      value: /^[a-zA-Z\s]+$/,
-                      message: "Invalid degree!",
-                    },
+                    required: "Degree/Course is required!",
+                    maxLength: { value: 20, message: "Max 20 characters!" },
                   }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Inputcomponent
-                  submitted={isSubmitted}
                   control={control}
                   type="number"
                   name={`score${i + 1}`}
@@ -143,9 +153,8 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
-                  submitted={isSubmitted}
                   control={control}
-                  options={years}
+                  options={startYears}
                   label="Start Year"
                   name={`startyear${i + 1}`}
                   rules={{ required: "Start year is required!" }}
@@ -153,9 +162,8 @@ const Education = ({ onNext, onBack }) => {
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Dropdowncomponent
-                  submitted={isSubmitted}
                   control={control}
-                  options={years}
+                  options={endYears}
                   label="End Year"
                   name={`endyear${i + 1}`}
                   rules={{ required: "End year is required!" }}
@@ -236,7 +244,7 @@ const Education = ({ onNext, onBack }) => {
                 Reset
               </Button>
 
-              {isSubmitted ? (
+              {isSubmit ? (
                 <Button
                   variant="contained"
                   sx={{

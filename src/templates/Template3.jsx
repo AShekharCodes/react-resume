@@ -4,16 +4,18 @@ import { Avatar } from "@mui/material";
 import "../styles/Template3.css";
 
 const Template3 = () => {
-  //Here, I have fetched both values from redux and localstorage. So, in case of reload, the data will not be lost
-  const imageStorage = localStorage.getItem("profileimage");
+  //Here, I have fetched both values from redux and sessionStorage. So, in case of reload, the data will not be lost
+  const imageStorage = sessionStorage.getItem("profileimage");
   const personal = useSelector((state) => state.personalInfo.value);
-  const personalStorage = JSON.parse(localStorage.getItem("personalInfo"));
+  const personalStorage = JSON.parse(sessionStorage.getItem("personalInfo"));
   const experience = useSelector((state) => state.workExperience.value);
-  const experienceStorage = JSON.parse(localStorage.getItem("workExperience"));
+  const experienceStorage = JSON.parse(
+    sessionStorage.getItem("workExperience")
+  );
   const education = useSelector((state) => state.education.value);
-  const educationStorage = JSON.parse(localStorage.getItem("education"));
+  const educationStorage = JSON.parse(sessionStorage.getItem("education"));
   const skills = useSelector((state) => state.skills.value);
-  const skillsStorage = JSON.parse(localStorage.getItem("skills"));
+  const skillsStorage = JSON.parse(sessionStorage.getItem("skills"));
 
   return (
     <div id="Template3">
