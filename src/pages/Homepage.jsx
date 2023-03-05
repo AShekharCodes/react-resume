@@ -20,7 +20,6 @@ const Homepage = () => {
     sessionStorage.clear();
     dispatch(setTemplateId(templateId));
     sessionStorage.setItem("templateId", templateId);
-    console.log(templateId);
     navigate("/details");
     window.location.reload(); //refreshing before displaying form to clear out tab's state
   };

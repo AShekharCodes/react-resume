@@ -42,7 +42,6 @@ const Personalinfo = ({ onNext, validated }) => {
     setIsSubmit(true);
     // sets validation for personalnfo form to true and saves it in sessionstorage
     validated();
-    console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);

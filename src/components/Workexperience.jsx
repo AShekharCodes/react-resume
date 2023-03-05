@@ -55,7 +55,6 @@ const Workexperience = ({ onNext, onBack, validated }) => {
     setIsSubmit(true);
     // sets form validated to true
     validated();
-    console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);

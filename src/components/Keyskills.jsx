@@ -48,7 +48,6 @@ const Keyskills = ({ onBack }) => {
     sessionStorage.setItem("skills", JSON.stringify(data));
     dispatch(addSkillInfo(data));
     setIsSubmit(true);
-    console.log(data);
     setTimeout(() => {
       // checks if all forms are validated, then proceeds
       // also i have added timeout functionality in all submitting button to make user feel data is being processed through that slight delay

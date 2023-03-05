@@ -62,7 +62,6 @@ const Education = ({ onNext, onBack, validated }) => {
     dispatch(addEducationInfo(data));
     setIsSubmit(true);
     validated();
-    console.log(data);
     setTimeout(() => {
       onNext();
     }, 1200);
