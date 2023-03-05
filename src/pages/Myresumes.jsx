@@ -15,7 +15,7 @@ const Myresumes = () => {
         {/* displaying conditionally if pdf file is present */}
         {pdf ? (
           <div className="my-resume">
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
               <Viewer fileUrl={pdf} defaultScale={0.7} />
             </Worker>
           </div>

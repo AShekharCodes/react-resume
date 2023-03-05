@@ -9,7 +9,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import { FaReact } from "react-icons/fa";
 import { SiRedux } from "react-icons/si";
-import { SiMaterialui } from "react-icons/si";
+import { SiMui } from "react-icons/si";
 import about from "../images/about.jpg";
 import "../styles/About.css";
 
@@ -88,7 +88,7 @@ const Aboutus = () => {
             </Tooltip>
             <Tooltip title="Material UI">
               <a href="https://mui.com/">
-                <SiMaterialui />
+                <SiMui />
               </a>
             </Tooltip>
           </div>
