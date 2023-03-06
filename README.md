@@ -22,4 +22,4 @@ Create a profession looking resume with our Resume builder app and choose from d
     
     
     #### Contributors :    
-  1. Anjali Vats[Profile](https://github.com/Anjal1723B).
+  1. Anjali Vats [Profile](https://github.com/Anjal1723B).
