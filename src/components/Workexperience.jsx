@@ -13,11 +13,11 @@ const Workexperience = ({ onNext, onBack, validated }) => {
 
   // items that are to be used in dropdown input fields
   const startYears = [];
-  for (let year = 2010; year <= 2023; year++) {
+  for (let year = 2010; year <= 2024; year++) {
     startYears.push({ value: year.toString(), label: year.toString() });
   }
   const endYears = [];
-  for (let year = 2010; year <= 2023; year++) {
+  for (let year = 2010; year <= 2024; year++) {
     endYears.push({ value: year.toString(), label: year.toString() });
   }
   endYears.push({ value: "Not yet", label: "Not yet" });
